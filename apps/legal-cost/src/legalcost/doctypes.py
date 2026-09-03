@@ -31,6 +31,17 @@ class DocType:
     items: tuple[str, ...]
     signatures: tuple[Signature, ...]
     allocation_label: str
+    # 월 표기가 문서마다 다르다. 원본 시트에 손으로 적힌 문자열이라 규칙이 없다.
+    # 산안비는 '26년 08월, 나머지는 '26년 8월. 항목월은 또 따로 논다.
+    # {yy}=두자리 연도, {m}=월(0 없음), {mm}=월(0 채움)
+    summary_period: str = "'{yy}년 {m}월"
+    monthly_period: str = "{yy}년 {m}월"
+
+    def format_summary_period(self, year: int, month: int) -> str:
+        return self.summary_period.format(yy=f"{year % 100:02d}", m=month, mm=f"{month:02d}")
+
+    def format_monthly_period(self, year: int, month: int) -> str:
+        return self.monthly_period.format(yy=f"{year % 100:02d}", m=month, mm=f"{month:02d}")
 
 
 DOC_TYPES: dict[str, DocType] = {
@@ -56,6 +67,8 @@ DOC_TYPES: dict[str, DocType] = {
             Signature("확 인 자", "안전보건총괄책임자"),
         ),
         allocation_label="계상된 안전관리비",
+        summary_period="'{yy}년 {mm}월",
+        monthly_period="{yy}년{mm}월",
     ),
     "안전1": DocType(
         key="안전1",
@@ -85,6 +98,7 @@ DOC_TYPES: dict[str, DocType] = {
         ),
         signatures=(Signature("확 인 자", "안전보건총괄책임자"),),
         allocation_label="계상된 안전관리비",
+        monthly_period="{yy}년 {mm}월",
     ),
     "환경": DocType(
         key="환경",
