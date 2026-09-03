@@ -36,6 +36,13 @@ class DocType:
     # {yy}=두자리 연도, {m}=월(0 없음), {mm}=월(0 채움)
     summary_period: str = "'{yy}년 {m}월"
     monthly_period: str = "{yy}년 {m}월"
+    # 항목월 표의 항목 행 수. 산안비만 9줄이고 나머지는 8줄이다.
+    monthly_row_count: int = 8
+    # 내역서에서 항목마다 비워두는 최소 줄 수. 원본 서식에서 실측한 값이며,
+    # 집행이 더 많으면 이보다 늘어난다.
+    detail_min_rows: tuple[int, ...] = ()
+    # 내역서 줄 높이(pt). 산안비는 줄을 촘촘히 써서 한 장에 더 많이 담는다.
+    detail_row_height: float = 28.46
 
     def format_summary_period(self, year: int, month: int) -> str:
         return self.summary_period.format(yy=f"{year % 100:02d}", m=month, mm=f"{month:02d}")
@@ -69,6 +76,9 @@ DOC_TYPES: dict[str, DocType] = {
         allocation_label="계상된 안전관리비",
         summary_period="'{yy}년 {mm}월",
         monthly_period="{yy}년{mm}월",
+        monthly_row_count=9,
+        detail_min_rows=(4, 11, 22, 4, 18, 11, 5, 3, 3),
+        detail_row_height=20.5,
     ),
     "안전1": DocType(
         key="안전1",
@@ -85,6 +95,7 @@ DOC_TYPES: dict[str, DocType] = {
         ),
         signatures=(Signature("확 인 자", "안전보건총괄책임자"),),
         allocation_label="계상된 안전관리비",
+        detail_min_rows=(5, 5, 5, 4, 5),
     ),
     "안전2": DocType(
         key="안전2",
@@ -99,6 +110,7 @@ DOC_TYPES: dict[str, DocType] = {
         signatures=(Signature("확 인 자", "안전보건총괄책임자"),),
         allocation_label="계상된 안전관리비",
         monthly_period="{yy}년 {mm}월",
+        detail_min_rows=(5, 5),
     ),
     "환경": DocType(
         key="환경",
@@ -116,5 +128,6 @@ DOC_TYPES: dict[str, DocType] = {
         ),
         signatures=(Signature("확 인 자", "환경관리 책임자"),),
         allocation_label="계상된 환경 보전비",
+        detail_min_rows=(4, 4, 3, 3, 3, 4),
     ),
 }

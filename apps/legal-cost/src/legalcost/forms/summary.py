@@ -176,7 +176,10 @@ def _draw(sheet, site, month, doc, totals, font_body, font_title) -> None:
         _row(sheet, y, ITEM_ROW_HEIGHT, amount_dividers)
         baseline = y + ITEM_ROW_HEIGHT * 0.66
         if row is not None:
-            sheet.text(TABLE_LEFT + 5, baseline, row.name, font_title, 7.5)
+            name_width = COL_NAME_RIGHT - TABLE_LEFT - 10
+            lines = sheet.wrap(row.name, font_title, 7.5, name_width)
+            first = baseline - (len(lines) - 1) * 4.5
+            sheet.wrapped_text(TABLE_LEFT + 5, first, row.name, font_title, 7.5, name_width, 9)
             sheet.right_text(COL_PREV - 5, baseline, format_amount(row.prev_cum), font_body, 8.5)
             sheet.right_text(COL_CURRENT - 5, baseline, format_amount(row.current), font_body, 8.5)
             sheet.right_text(COL_CUM - 5, baseline, format_amount(row.cum), font_body, 8.5)

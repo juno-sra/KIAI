@@ -33,26 +33,26 @@ def _render(tmp_path, month, fonts):
 
 
 def test_every_item_gets_a_subtotal_row(sample_month):
-    rows = [row for page in paginate(sample_month, rows_per_page=1000) for row in page]
+    rows = [row for page in paginate(sample_month, rows_per_page_override=1000) for row in page]
     assert len([r for r in rows if r.kind == "subtotal"]) == 9
 
 
 def test_subtotal_equals_sum_of_its_entries(sample_month):
-    rows = [row for page in paginate(sample_month, rows_per_page=1000) for row in page]
+    rows = [row for page in paginate(sample_month, rows_per_page_override=1000) for row in page]
     first_subtotal = next(r for r in rows if r.kind == "subtotal")
     assert first_subtotal.subtotal == 5416670
 
 
 def test_pagination_splits_when_rows_exceed_capacity(sample_month):
     month = replace(sample_month, entries=[_entry(1, n) for n in range(80)])
-    pages = paginate(month, rows_per_page=30)
+    pages = paginate(month, rows_per_page_override=30)
     assert len(pages) > 1
     assert all(len(page) <= 30 for page in pages)
 
 
 def test_pagination_keeps_all_rows(sample_month):
     month = replace(sample_month, entries=[_entry(1, n) for n in range(80)])
-    rows = [row for page in paginate(month, rows_per_page=30) for row in page]
+    rows = [row for page in paginate(month, rows_per_page_override=30) for row in page]
     assert len([r for r in rows if r.kind == "entry"]) == 80
     assert len([r for r in rows if r.kind == "subtotal"]) == 9
 

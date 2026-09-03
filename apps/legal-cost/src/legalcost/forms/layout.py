@@ -75,6 +75,48 @@ class Sheet:
 
         self._upright(x, y, draw)
 
+    def wrap(self, s: str, font: str, size: float, max_width: float) -> list[str]:
+        """칸 너비에 맞게 문자열을 여러 줄로 접는다.
+
+        한국어는 어절 단위로 끊는다. 한 어절이 칸보다 길면 글자 단위로 자른다.
+        """
+        if not s:
+            return [""]
+        lines: list[str] = []
+        current = ""
+        for word in s.split(" "):
+            candidate = f"{current} {word}".strip()
+            if current and pdfmetrics.stringWidth(candidate, font, size) > max_width:
+                lines.append(current)
+                current = word
+            else:
+                current = candidate
+            while pdfmetrics.stringWidth(current, font, size) > max_width and len(current) > 1:
+                cut = len(current) - 1
+                while cut > 1 and pdfmetrics.stringWidth(current[:cut], font, size) > max_width:
+                    cut -= 1
+                lines.append(current[:cut])
+                current = current[cut:]
+        if current:
+            lines.append(current)
+        return lines
+
+    def wrapped_text(
+        self,
+        x: float,
+        y: float,
+        s: str,
+        font: str,
+        size: float,
+        max_width: float,
+        line_height: float,
+    ) -> int:
+        """접어서 그리고 그린 줄 수를 돌려준다. y 는 첫 줄의 기준선이다."""
+        lines = self.wrap(s, font, size, max_width)
+        for index, line in enumerate(lines):
+            self.text(x, y + index * line_height, line, font, size)
+        return len(lines)
+
     def line(self, x1: float, y1: float, x2: float, y2: float, width: float = 0.5) -> None:
         self.canvas.setLineWidth(width)
         self.canvas.line(x1, y1, x2, y2)
@@ -83,13 +125,21 @@ class Sheet:
         self.canvas.setLineWidth(width)
         self.canvas.rect(x, y, w, h, stroke=1, fill=0)
 
-    def image(self, path, x: float, y: float, w: float, h: float) -> None:
+    def image(self, path, x: float, y: float, w: float, h: float, keep_ratio: bool = True) -> None:
         def draw():
             self.canvas.drawImage(
-                str(path), 0, 0, width=w, height=h, preserveAspectRatio=True, anchor="c"
+                str(path), 0, 0, width=w, height=h, preserveAspectRatio=keep_ratio, anchor="c"
             )
 
         self._upright(x, y + h, draw)
+
+    def full_bleed_image(self, path, page_top: float, page_bottom: float) -> None:
+        """여백을 넘어 페이지 폭을 꽉 채워 그린다. 발주처 배너처럼 재단선까지 가는 그림용."""
+        x = -self.spec.margin_left / self.spec.scale
+        y = (page_top - self.spec.margin_top) / self.spec.scale
+        width = PAGE_SIZE[0] / self.spec.scale
+        height = (page_bottom - page_top) / self.spec.scale
+        self.image(path, x, y, width, height, keep_ratio=False)
 
     def close(self) -> None:
         self.canvas.restoreState()

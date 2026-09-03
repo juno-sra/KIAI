@@ -60,7 +60,7 @@ def build_sheets(
     )
     detail = _render(
         out_dir / f"{stem}_내역서.pdf",
-        lambda c: draw_detail(c, month, font_body, font_title),
+        lambda c: draw_detail(c, month, font_body, font_title, site.company),
     )
 
     photos = None

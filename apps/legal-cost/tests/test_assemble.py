@@ -8,6 +8,7 @@ from reportlab.pdfgen import canvas as rl_canvas
 
 from legalcost import PAGE_SIZE
 from legalcost.assemble import build_sheets, build_submission, merge
+from legalcost.forms.detail import paginate
 from legalcost.models import Evidence, Photo
 
 
@@ -35,11 +36,13 @@ def test_build_sheets_writes_four_individual_files(tmp_path, sample_site, sample
     assert sheets.photos is None
 
 
-def test_submission_has_four_pages_without_photos_or_evidence(
+def test_submission_is_three_fixed_sheets_plus_detail_pages(
     tmp_path, sample_site, sample_month, fonts
 ):
+    """갑지·집계표·항목월은 각 1장, 내역서는 내용에 따라 여러 장이 된다."""
+    detail_pages = len(paginate(sample_month))
     out = build_submission(sample_site, sample_month, tmp_path, fonts["body"], fonts["title"])
-    assert len(pdfium.PdfDocument(str(out))) == 4
+    assert len(pdfium.PdfDocument(str(out))) == 3 + detail_pages
 
 
 def test_submission_appends_photo_sheets_then_evidence(
@@ -58,8 +61,9 @@ def test_submission_appends_photo_sheets_then_evidence(
         evidences=[Evidence(0, evidence_pdf, "세금계산서")],
     )
     out = build_submission(sample_site, month, tmp_path, fonts["body"], fonts["title"])
-    # 장표 4 + 사진대지 2 + 증빙 2
-    assert len(pdfium.PdfDocument(str(out))) == 8
+    # 갑지1 + 집계표1 + 항목월1 + 내역서N + 사진대지2 + 증빙2
+    expected = 3 + len(paginate(month)) + 2 + 2
+    assert len(pdfium.PdfDocument(str(out))) == expected
 
 
 def test_submission_page_size_is_exact(tmp_path, sample_site, sample_month, fonts):
@@ -76,4 +80,4 @@ def test_non_pdf_evidence_is_skipped_in_merge(tmp_path, sample_site, sample_mont
     Image.new("RGB", (100, 100), (255, 255, 255)).save(image, "JPEG")
     month = replace(sample_month, evidences=[Evidence(0, image, "영수증")])
     out = build_submission(sample_site, month, tmp_path, fonts["body"], fonts["title"])
-    assert len(pdfium.PdfDocument(str(out))) == 4
+    assert len(pdfium.PdfDocument(str(out))) == 3 + len(paginate(month))

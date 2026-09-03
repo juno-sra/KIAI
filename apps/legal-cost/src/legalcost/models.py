@@ -23,6 +23,13 @@ class Site:
     author_name: str = ""
     approver_title: str = ""
     approver_name: str = ""
+    # 갑지의 시공사 칸은 집계표와 다르게 적는다. 예: "케이아이건설㈜외 1개사"
+    cover_company: str = ""
+    # 갑지 상단 발주처 배너 이미지. 없으면 그리지 않는다.
+    banner_path: Path | None = None
+
+    def cover_company_name(self) -> str:
+        return self.cover_company or self.company
 
 
 @dataclass(frozen=True)
