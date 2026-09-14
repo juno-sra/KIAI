@@ -17,3 +17,7 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
+
+# 안전관리 AI 비서 - 실제 현장 설정 (공사금액, 경로 등 비공개 정보)
+apps/safety-assistant/site.yaml
+apps/safety-assistant/site-data/

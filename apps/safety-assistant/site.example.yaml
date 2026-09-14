@@ -2,7 +2,7 @@
 # rules/ 의 applies_when 은 이 값과 대조해 평가한다.
 
 site:
-  name: 안양 인덕원 현장
+  name: <현장명>
   industry: 건설업
   role: 도급인                      # 도급인 | 수급인
   contract_amount_krw: null         # 공사금액(원). 미입력 시 금액 기준 규칙은 평가 보류
@@ -25,7 +25,7 @@ site:
 
 paths:
   # 문서 산출물이 저장될 위치 (OneDrive 동기화 폴더)
-  output_dir: 'C:\Users\XANNY\OneDrive\문서\00. 안양 인덕원 현장 안전_보건 파트 관리사항'
+  output_dir: 'C:\Users\<사용자명>\OneDrive\문서\<현장 폴더>'
 
   # 대장 데이터베이스 위치.
   # OneDrive 동기화 폴더에 SQLite 파일을 두면 동기화 충돌로 파일이 손상될 수 있으므로
