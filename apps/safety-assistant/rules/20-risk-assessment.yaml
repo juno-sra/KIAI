@@ -1,0 +1,89 @@
+# 위험성평가 및 작업 전 안전점검회의
+
+- id: risk-assessment-initial
+  name: 위험성평가 (최초평가)
+  category: 위험성평가
+  basis:
+    law: 산업안전보건법 제36조제1항
+    notice: 고용노동부고시 「사업장 위험성평가에 관한 지침」
+    note: 고시 번호는 원문 대조 후 기재한다. 현재 미확인.
+  verified: false
+  applies_when: {}
+  frequency:
+    once_at_start: true
+    text: "사업장 성립 후 1개월 이내 착수"
+  output:
+    form: 위험성평가표
+    format: pdf
+  delegation: L1
+
+- id: risk-assessment-regular
+  name: 위험성평가 (정기평가)
+  category: 위험성평가
+  basis:
+    law: 산업안전보건법 제36조제1항
+    notice: 고용노동부고시 「사업장 위험성평가에 관한 지침」
+  verified: false
+  applies_when: {}
+  frequency:
+    every_months: 12
+    text: "매년 1회 이상"
+  output:
+    form: 위험성평가표
+    format: pdf
+  delegation: L1
+
+- id: risk-assessment-occasional
+  name: 위험성평가 (수시평가)
+  category: 위험성평가
+  basis:
+    law: 산업안전보건법 제36조제1항
+    notice: 고용노동부고시 「사업장 위험성평가에 관한 지침」
+    note: >-
+      기계·설비 신규 도입, 공법 변경, 중대산업사고 또는 산업재해 발생 등
+      사유 발생 시 실시. 구체적 사유 목록은 고시 원문 대조 필요.
+  verified: false
+  applies_when: {}
+  frequency:
+    event_driven: true
+    text: "사유 발생 시"
+  output:
+    form: 위험성평가표
+    format: pdf
+  delegation: L1
+
+- id: risk-assessment-worker-participation
+  name: 위험성평가 근로자 참여 기록
+  category: 위험성평가
+  basis:
+    law: 산업안전보건법 제36조제2항
+    note: 개인정보 미취급 전제이므로 참여 인원수·직종 단위로만 기록한다.
+  verified: false
+  applies_when: {}
+  frequency:
+    linked_to: risk-assessment-initial
+    text: "위험성평가 실시 시마다"
+  output:
+    form: 근로자 참여 기록
+    format: pdf
+  delegation: L2
+
+- id: tbm
+  name: 작업 전 안전점검회의(TBM)
+  category: 점검
+  basis:
+    law: 근거 확인 불가
+    decree: 산업안전보건법 시행령 제15조
+    note: >-
+      TBM을 직접 규정한 법령 조문은 확인되지 않았다. 법정 의무가 아니라
+      관리감독자의 직무(작업 전 안전점검, 시행령 제15조)를 이행하는 운영 수단으로
+      취급한다. 미실시가 곧 법 위반은 아니므로 경고 강도를 낮게 설정한다.
+  verified: false
+  applies_when: {}
+  frequency:
+    every_days: 1
+    text: "작업일마다"
+  output:
+    form: TBM 시트
+    format: pdf
+  delegation: L1

@@ -1,0 +1,38 @@
+# 서류 보존
+
+- id: record-retention
+  name: 서류 보존 관리
+  category: 보존
+  basis:
+    law: 산업안전보건법 제164조
+    note: >-
+      서류 종류별로 보존기간이 다르다(2년·3년·5년·30년 등).
+      종류별 보존기간 표는 제164조 각 항 원문 대조 후 아래 items 에 채운다.
+      현재 items 는 비어 있으므로 프로그램은 보존기간 계산을 수행하지 않는다.
+  verified: false
+  applies_when: {}
+  frequency:
+    continuous: true
+    text: "상시"
+  items: []
+  output:
+    form: 보존기간 만료 예정 목록
+    format: pdf
+  delegation: L3
+
+- id: risk-assessment-record-retention
+  name: 위험성평가 결과 보존
+  category: 보존
+  basis:
+    law: 산업안전보건법 제164조제1항
+    note: 보존기간(3년으로 알려져 있음)은 원문 대조 필요.
+  verified: false
+  applies_when: {}
+  frequency:
+    linked_to: risk-assessment-initial
+    text: "위험성평가 실시 후"
+  retention_years: 3
+  output:
+    form: 위험성평가 기록 편철
+    format: pdf
+  delegation: L3

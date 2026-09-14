@@ -1,0 +1,25 @@
+[project]
+name = "safetyassist"
+version = "0.1.0"
+description = "건설현장 안전관리 법정 의무 캘린더 및 문서 엔진"
+requires-python = ">=3.11"
+dependencies = [
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+safetyassist = "safetyassist.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
