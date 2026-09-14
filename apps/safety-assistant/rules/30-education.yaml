@@ -1,0 +1,111 @@
+# 안전보건교육
+# 주의: 교육시간 수치는 시행규칙 별표4 원문 대조 전이다. 전부 verified: false.
+
+- id: education-regular-worker
+  name: 근로자 정기교육
+  category: 교육
+  basis:
+    law: 산업안전보건법 제29조제1항
+    rule: 산업안전보건법 시행규칙 제26조 및 별표4
+    note: >-
+      교육시간은 별표4에서 근로자 구분(사무직/그 외, 일용/상용)에 따라 달라진다.
+      구체 시간 수치는 원문 대조 후 기재한다. 현재 미확인.
+  verified: false
+  applies_when: {}
+  frequency:
+    every_months: 6
+    text: "매 반기"
+  output:
+    form: 교육일지 및 서명부
+    format: pdf
+  delegation: L1
+
+- id: education-supervisor
+  name: 관리감독자 정기교육
+  category: 교육
+  basis:
+    law: 산업안전보건법 제29조제1항
+    rule: 산업안전보건법 시행규칙 제26조 및 별표4
+    note: 연간 교육시간 수치는 원문 대조 필요.
+  verified: false
+  applies_when: {}
+  frequency:
+    every_months: 12
+    text: "연간"
+  output:
+    form: 교육일지 및 서명부
+    format: pdf
+  delegation: L1
+
+- id: education-on-hire
+  name: 채용 시 교육
+  category: 교육
+  basis:
+    law: 산업안전보건법 제29조제2항
+    rule: 산업안전보건법 시행규칙 제26조 및 별표4
+    note: 일용근로자와 그 외 근로자의 교육시간이 다르다. 수치는 원문 대조 필요.
+  verified: false
+  applies_when: {}
+  frequency:
+    event_driven: true
+    text: "근로자 채용 시"
+  output:
+    form: 교육일지 및 서명부
+    format: pdf
+  delegation: L1
+
+- id: education-job-change
+  name: 작업내용 변경 시 교육
+  category: 교육
+  basis:
+    law: 산업안전보건법 제29조제2항
+    rule: 산업안전보건법 시행규칙 제26조 및 별표4
+  verified: false
+  applies_when: {}
+  frequency:
+    event_driven: true
+    text: "작업내용 변경 시"
+  output:
+    form: 교육일지 및 서명부
+    format: pdf
+  delegation: L1
+
+- id: education-special
+  name: 특별교육
+  category: 교육
+  basis:
+    law: 산업안전보건법 제29조제3항
+    rule: 산업안전보건법 시행규칙 제26조, 별표4 및 별표5
+    note: >-
+      유해·위험 작업에 근로자를 사용할 때 실시. 대상 작업 목록은 별표5에 있다.
+      대상 작업과 교육시간 모두 원문 대조 필요.
+  verified: false
+  applies_when: {}
+  frequency:
+    event_driven: true
+    text: "유해·위험작업 배치 시"
+  output:
+    form: 교육일지 및 서명부
+    format: pdf
+  delegation: L1
+
+- id: education-basic-construction
+  name: 건설업 기초안전보건교육 이수 확인
+  category: 교육
+  basis:
+    law: 산업안전보건법 제31조
+    note: >-
+      건설 일용근로자를 채용할 때 기초안전보건교육을 이수하도록 해야 한다.
+      교육시간 수치는 원문 대조 필요.
+      개인정보 미취급 전제이므로 프로그램은 미이수 인원수만 집계하고
+      개인 식별정보는 저장하지 않는다.
+  verified: false
+  applies_when:
+    industry: 건설업
+  frequency:
+    event_driven: true
+    text: "건설 일용근로자 채용 시"
+  output:
+    form: 기초안전보건교육 이수 현황(인원수)
+    format: pdf
+  delegation: L2

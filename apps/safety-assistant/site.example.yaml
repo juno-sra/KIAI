@@ -1,0 +1,33 @@
+# 현장 설정 예시. 실제 파일(site.yaml)은 저장소에 커밋하지 않는다.
+# rules/ 의 applies_when 은 이 값과 대조해 평가한다.
+
+site:
+  name: 안양 인덕원 현장
+  industry: 건설업
+  role: 도급인                      # 도급인 | 수급인
+  contract_amount_krw: null         # 공사금액(원). 미입력 시 금액 기준 규칙은 평가 보류
+  start_date: null                  # 착공일 (YYYY-MM-DD)
+  end_date: null                    # 준공예정일 (YYYY-MM-DD)
+
+  # 선임 현황
+  appointments:
+    safety_manager: 1               # 안전관리자 수 (시행령 별표3: 50억~800억 미만 1명)
+    general_supervisor: true        # 안전보건총괄책임자 선임 여부 (법 제62조)
+
+  # 적용 제외
+  exclusions:
+    hazard_prevention_plan: true    # 유해위험방지계획서 비대상 (시행령 제42조제3항 해당 없음)
+
+  # 개인정보 취급 정책
+  privacy:
+    store_personal_data: false      # 성명·생년월일·연락처 저장 금지
+    aggregate_only: true            # 인원수·직종 단위 집계만
+
+paths:
+  # 문서 산출물이 저장될 위치 (OneDrive 동기화 폴더)
+  output_dir: 'C:\Users\XANNY\OneDrive\문서\00. 안양 인덕원 현장 안전_보건 파트 관리사항'
+
+  # 대장 데이터베이스 위치.
+  # OneDrive 동기화 폴더에 SQLite 파일을 두면 동기화 충돌로 파일이 손상될 수 있으므로
+  # 반드시 동기화되지 않는 로컬 경로에 둔다. 백업은 프로그램이 별도로 수행한다.
+  data_dir: '%LOCALAPPDATA%\SafetyAssistant'
