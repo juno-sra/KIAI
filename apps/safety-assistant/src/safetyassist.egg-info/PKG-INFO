@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: safetyassist
+Version: 0.1.0
+Summary: 건설현장 안전관리 법정 의무 캘린더 및 문서 엔진
+Requires-Python: >=3.11
+Requires-Dist: PyYAML>=6.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
