@@ -1,7 +1,7 @@
 # SMP TBM 모듈 명세서
 
 - 문서번호: SMP-MOD-TBM-001
-- 상위 문서: SMP-ARCH-001 (`2026-09-16-smp-platform-architecture.md`)
+- 상위 문서: SMP-ARCH-001 (`2026-09-16-smp-program-architecture.md`)
 - 작성일: 2026-09-16
 - 상태: 초안 (검토 대기)
 
