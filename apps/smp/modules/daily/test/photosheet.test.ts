@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
   PHOTO_AREA_HEIGHT_PT,
+  PHOTO_PADDING_PX,
   PHOTO_SHEET_WIDTH_PT,
+  PHOTOS_PER_PAGE,
   renderPhotoSheet,
 } from '../src/tbm/photosheet.js';
 import { ptToMm } from '../src/tbm/render.js';
@@ -61,28 +63,59 @@ describe('서식 항목', () => {
   });
 });
 
-describe('사진 여러 장', () => {
-  it('장수만큼 면을 만들고 번호를 매긴다', () => {
-    const html = renderPhotoSheet({
-      ...base,
-      sources: { a: 'data:image/jpeg;base64,A', b: 'data:image/jpeg;base64,B' },
-      photos: [
-        { sha256: 'a', ext: '.jpg' },
-        { sha256: 'b', ext: '.jpg' },
-      ],
-    });
+describe('페이지당 2장', () => {
+  const four = ['a', 'b', 'c', 'd'].map((h) => ({ sha256: h, ext: '.jpg' }));
+  const sources = Object.fromEntries(four.map((p) => [p.sha256, `data:image/jpeg;base64,${p.sha256}`]));
+
+  it('기본값이 2장이다', () => {
+    expect(PHOTOS_PER_PAGE).toBe(2);
+  });
+
+  it('두 장씩 묶어 면을 만든다', () => {
+    const html = renderPhotoSheet({ ...base, sources, photos: four });
     expect(html.match(/class="sheet"/g)).toHaveLength(2);
+    expect(html.match(/class="block"/g)).toHaveLength(4);
+  });
+
+  it('홀수면 마지막 면에 한 장만 넣는다', () => {
+    const html = renderPhotoSheet({ ...base, sources, photos: four.slice(0, 3) });
+    expect(html.match(/class="sheet"/g)).toHaveLength(2);
+    expect(html.match(/class="block"/g)).toHaveLength(3);
+  });
+
+  it('면 번호를 매긴다', () => {
+    const html = renderPhotoSheet({ ...base, sources, photos: four });
     expect(html).toContain('(1/2)');
     expect(html).toContain('(2/2)');
   });
 
-  it('한 장이면 번호를 붙이지 않는다', () => {
-    expect(renderPhotoSheet({ ...base, photos: onePhoto })).not.toContain('(1/1)');
+  it('한 면으로 끝나면 번호를 붙이지 않는다', () => {
+    const html = renderPhotoSheet({ ...base, photos: onePhoto });
+    expect(html).not.toContain('(1/1)');
   });
 
-  it('장마다 새 면에 인쇄한다', () => {
-    const html = renderPhotoSheet({ ...base, photos: onePhoto });
-    expect(html).toContain('page-break-after: always');
+  it('사진마다 번호를 표시한다', () => {
+    const html = renderPhotoSheet({ ...base, sources, photos: four });
+    expect(html.match(/class="no"/g)).toHaveLength(4);
+  });
+
+  it('한 장뿐이면 번호를 붙이지 않는다', () => {
+    expect(renderPhotoSheet({ ...base, photos: onePhoto })).not.toContain('class="no"');
+  });
+
+  it('페이지당 장수를 바꿀 수 있다', () => {
+    const html = renderPhotoSheet({ ...base, sources, photos: four, photosPerPage: 1 });
+    expect(html.match(/class="sheet"/g)).toHaveLength(4);
+  });
+
+  it('0장 이하는 거부한다', () => {
+    expect(() =>
+      renderPhotoSheet({ ...base, sources, photos: four, photosPerPage: 0 }),
+    ).toThrow(/1장 이상/);
+  });
+
+  it('면마다 새 페이지에 인쇄한다', () => {
+    expect(renderPhotoSheet({ ...base, photos: onePhoto })).toContain('page-break-after: always');
   });
 });
 
@@ -114,6 +147,11 @@ describe('사진 표시 방식', () => {
   it('비율을 유지한 채 칸에 맞춘다', () => {
     // 늘려 붙이면 현장 상황이 왜곡된다
     expect(renderPhotoSheet({ ...base, photos: onePhoto })).toContain('object-fit: contain');
+  });
+
+  it('사진 상하에 여백을 둔다 — 테두리에 딱 붙지 않게', () => {
+    expect(PHOTO_PADDING_PX).toBe(5);
+    expect(renderPhotoSheet({ ...base, photos: onePhoto })).toContain('padding: 5px 0');
   });
 
   it('설명에 든 특수문자를 escape 한다', () => {
