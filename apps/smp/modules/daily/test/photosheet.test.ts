@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import {
-  PHOTO_AREA_HEIGHT_PT,
+  MARGIN_BOTTOM_MM,
+  MARGIN_TOP_MM,
   PHOTO_PADDING_PX,
   PHOTO_SHEET_WIDTH_PT,
   PHOTOS_PER_PAGE,
   renderPhotoSheet,
+  sheetMetrics,
 } from '../src/tbm/photosheet.js';
 import { ptToMm } from '../src/tbm/render.js';
 
@@ -16,17 +18,48 @@ const base = {
 
 const onePhoto = [{ sha256: 'abc123', ext: '.jpg', caption: 'TBM 실시 장면' }];
 
-describe('실측값 반영', () => {
-  it('인쇄 폭과 사진 자리 높이가 실측값과 맞는다', () => {
-    expect(PHOTO_SHEET_WIDTH_PT).toBe(502.5);
-    expect(PHOTO_AREA_HEIGHT_PT).toBe(248.2);
-    expect(ptToMm(502.5)).toBeCloseTo(177.3, 1);
+describe('여백과 사진 크기', () => {
+  it('상단 25mm·하단 20mm 고정', () => {
+    expect(MARGIN_TOP_MM).toBe(25);
+    expect(MARGIN_BOTTOM_MM).toBe(20);
   });
 
-  it('여백과 치수를 mm로 환산해 넣는다', () => {
+  it('여백을 뺀 본문이 252mm다', () => {
+    expect(sheetMetrics(2).usableMm).toBeCloseTo(252.0, 1);
+  });
+
+  it('제목을 뺀 나머지를 장수로 균등 분할한다', () => {
+    const m = sheetMetrics(2);
+    // (252 - 제목 18.2) / 2
+    expect(m.blockMm).toBeCloseTo(116.9, 1);
+    expect(m.infoMm).toBeCloseTo(24.7, 1);
+    expect(m.photoMm).toBeCloseTo(92.2, 1);
+  });
+
+  it('장수를 바꾸면 사진 크기가 따라간다', () => {
+    expect(sheetMetrics(1).photoMm).toBeCloseTo(209.1, 1);
+    expect(sheetMetrics(3).photoMm).toBeCloseTo(53.2, 1);
+  });
+
+  it('사진이 들어갈 자리가 없으면 거부한다', () => {
+    // 한 면에 너무 많이 넣으려 하면 설명표만 남는다
+    expect(() => sheetMetrics(10)).toThrow(/사진 자리가 남지 않습니다/);
+  });
+
+  it('0장 이하는 거부한다', () => {
+    expect(() => sheetMetrics(0)).toThrow(/1장 이상/);
+  });
+
+  it('계산값을 인쇄 여백과 높이에 넣는다', () => {
     const html = renderPhotoSheet({ ...base, photos: onePhoto });
-    expect(html).toContain(`margin: ${ptToMm(46.5).toFixed(1)}mm`);
-    expect(html).toContain(`${ptToMm(248.2).toFixed(1)}mm`);
+    expect(html).toContain('margin: 25mm');
+    expect(html).toContain('20mm;');
+    expect(html).toContain('92.2mm');
+  });
+
+  it('인쇄 폭은 실측값을 유지한다', () => {
+    expect(PHOTO_SHEET_WIDTH_PT).toBe(502.5);
+    expect(renderPhotoSheet({ ...base, photos: onePhoto })).toContain('177.3mm');
   });
 
   it('A4 세로로 인쇄하고 Pretendard를 쓴다', () => {
@@ -108,7 +141,7 @@ describe('페이지당 2장', () => {
     expect(html.match(/class="sheet"/g)).toHaveLength(4);
   });
 
-  it('0장 이하는 거부한다', () => {
+  it('렌더러도 0장 이하를 거부한다', () => {
     expect(() =>
       renderPhotoSheet({ ...base, sources, photos: four, photosPerPage: 0 }),
     ).toThrow(/1장 이상/);

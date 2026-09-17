@@ -1,27 +1,76 @@
 /**
  * 사진대지 렌더러 — 「TBM 및 일일안전교육 일지」 2면.
  *
- * 실측값 (A4 세로 595 × 842 pt)
- *   좌측 46.5pt, 우측 549.0pt → 폭 502.5pt (약 177.3mm)
- *   사진 영역 165.0 ~ 413.2pt → 높이 248.2pt (약 87.6mm)
- *   설명표 414.0 ~ 482.6pt, 라벨 폭 66pt (약 23.3mm)
+ * 여백은 사용자 지정값을 따른다 — 상단 25mm, 하단 20mm 고정. 좌우는 실측값
+ * 46.5pt(약 16.4mm)를 쓴다.
  *
- * 페이지당 사진 2장을 넣는다. 실측 치수 그대로 두 세트를 쌓아도 A4 세로에
- * 21.5mm 여유가 남는다. 사진이 더 많으면 2장씩 나눠 면을 늘린다.
+ * 제목을 뺀 나머지 높이를 페이지당 장수로 **정확히 균등 분할**한다. 사진 자리
+ * 높이는 고정 상수가 아니라 이 분할에서 계산된다. 여백이나 장수를 바꾸면
+ * 사진 크기가 자동으로 따라간다.
+ *
+ * 실측 참고값
+ *   인쇄 폭 502.5pt (약 177.3mm)
+ *   설명표 라벨 폭 66pt (약 23.3mm), 행 높이 35pt
  */
 import type { TbmPhoto } from './types.js';
 import { formatDateKo, ptToMm } from './render.js';
 
 /** 실측 인쇄 폭 (pt) */
 export const PHOTO_SHEET_WIDTH_PT = 502.5;
-/** 사진 자리 높이 (pt) */
-export const PHOTO_AREA_HEIGHT_PT = 248.2;
 /** 설명표 라벨 폭 (pt) */
 export const PHOTO_LABEL_WIDTH_PT = 66;
+/** 설명표 한 행 높이 (pt) */
+export const INFO_ROW_HEIGHT_PT = 35;
 /** 페이지당 사진 수 */
 export const PHOTOS_PER_PAGE = 2;
 /** 사진 상하 여백 (px) — 테두리에 딱 붙지 않게 한다 */
 export const PHOTO_PADDING_PX = 5;
+
+/** 용지 높이 (mm) — A4 세로 */
+export const PAGE_HEIGHT_MM = 297;
+/** 상단 여백 (mm) — 사용자 지정 */
+export const MARGIN_TOP_MM = 25;
+/** 하단 여백 (mm) — 사용자 지정 */
+export const MARGIN_BOTTOM_MM = 20;
+/** 좌우 여백 (mm) — 실측 46.5pt */
+export const MARGIN_SIDE_MM = 46.5 * (25.4 / 72);
+
+/** 제목 + 부제가 차지하는 높이 (mm) */
+export const TITLE_BLOCK_MM = 18.2;
+
+export interface SheetMetrics {
+  /** 여백을 뺀 본문 높이 */
+  usableMm: number;
+  /** 세트(사진 + 설명표) 하나의 높이 */
+  blockMm: number;
+  /** 사진 자리 높이 */
+  photoMm: number;
+  /** 설명표 높이 */
+  infoMm: number;
+}
+
+/**
+ * 여백과 장수로부터 사진 크기를 구한다.
+ *
+ * 제목을 뺀 나머지를 장수로 균등 분할하므로, 한 면의 사진들은 항상 같은 크기다.
+ */
+export function sheetMetrics(photosPerPage: number = PHOTOS_PER_PAGE): SheetMetrics {
+  if (photosPerPage < 1) throw new Error('페이지당 사진 수는 1장 이상이어야 합니다.');
+
+  const usableMm = PAGE_HEIGHT_MM - MARGIN_TOP_MM - MARGIN_BOTTOM_MM;
+  const blockMm = (usableMm - TITLE_BLOCK_MM) / photosPerPage;
+  const infoMm = INFO_ROW_HEIGHT_PT * 2 * (25.4 / 72);
+  const photoMm = blockMm - infoMm;
+
+  if (photoMm <= 0) {
+    throw new Error(
+      `여백과 장수가 맞지 않습니다. 본문 ${usableMm.toFixed(1)}mm에 ` +
+        `${photosPerPage}장을 넣으면 사진 자리가 남지 않습니다.`,
+    );
+  }
+
+  return { usableMm, blockMm, photoMm, infoMm };
+}
 
 export interface PhotoSource {
   /** 첨부 해시 */
@@ -122,7 +171,7 @@ export function renderPhotoSheet(options: PhotoSheetOptions): string {
   const perPage = options.photosPerPage ?? PHOTOS_PER_PAGE;
   const photos = options.photos;
 
-  if (perPage < 1) throw new Error('페이지당 사진 수는 1장 이상이어야 합니다.');
+  const metrics = sheetMetrics(perPage);
 
   if (photos.length === 0 && !options.allowEmpty) {
     throw new Error(
@@ -150,8 +199,11 @@ export function renderPhotoSheet(options: PhotoSheetOptions): string {
 <style>
 ${fontCss}
 
-/* 실측 좌우 여백 46.5pt ≈ 16.4mm */
-@page { size: A4 portrait; margin: ${ptToMm(46.5).toFixed(1)}mm; }
+/* 여백 — 상단·하단은 사용자 지정, 좌우는 실측값 */
+@page {
+  size: A4 portrait;
+  margin: ${MARGIN_TOP_MM}mm ${MARGIN_SIDE_MM.toFixed(1)}mm ${MARGIN_BOTTOM_MM}mm;
+}
 
 * { box-sizing: border-box; }
 
@@ -164,34 +216,40 @@ body {
 
 .sheet {
   width: ${ptToMm(PHOTO_SHEET_WIDTH_PT).toFixed(1)}mm;
-  /* 사진이 여러 장이면 장마다 새 면에 인쇄한다 */
+  /* 한 면을 넘으면 새 면에 인쇄한다 */
   page-break-after: always;
   break-after: page;
 }
 .sheet:last-child { page-break-after: auto; break-after: auto; }
 
+/* 제목 영역 — 합계 ${TITLE_BLOCK_MM}mm */
 h1 {
-  font-size: 18pt;
+  font-size: 17pt;
   font-weight: 600;
   text-align: center;
   letter-spacing: 6pt;
-  margin: ${ptToMm(14).toFixed(1)}mm 0 2mm;
+  margin: 0 0 1.5mm;
+  line-height: 1.1;
 }
 
 .subtitle {
   text-align: center;
-  font-size: 10.5pt;
-  margin-bottom: ${ptToMm(12).toFixed(1)}mm;
+  font-size: 10pt;
+  margin: 0 0 4mm;
+  line-height: 1.1;
 }
 
-/* 사진 한 장 + 설명표 한 세트 */
-.block { margin-bottom: ${ptToMm(18).toFixed(1)}mm; }
-.block:last-child { margin-bottom: 0; }
+/*
+ * 사진 한 장 + 설명표 한 세트.
+ * 제목을 뺀 나머지를 장수로 균등 분할한 높이다.
+ */
+.block {
+  height: ${metrics.blockMm.toFixed(1)}mm;
+}
 
-/* 사진 자리 — 실측 높이 248.2pt */
 .photo {
   position: relative;
-  height: ${ptToMm(PHOTO_AREA_HEIGHT_PT).toFixed(1)}mm;
+  height: ${metrics.photoMm.toFixed(1)}mm;
   border: 0.5pt solid #000;
   display: flex;
   align-items: center;
@@ -236,8 +294,8 @@ h1 {
 .info td {
   border: 0.5pt solid #000;
   border-top: none;
-  padding: 2mm 2.5mm;
-  height: ${ptToMm(35).toFixed(1)}mm;
+  padding: 1.5mm 2.5mm;
+  height: ${(metrics.infoMm / 2).toFixed(1)}mm;
   vertical-align: middle;
 }
 .info .label {
