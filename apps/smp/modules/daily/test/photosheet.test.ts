@@ -209,6 +209,16 @@ describe('설명표 한 줄 구성', () => {
   it('긴 현장명이 줄을 밀어내지 않게 한다', () => {
     expect(html).toContain('text-overflow: ellipsis');
   });
+
+  it('라벨과 날짜는 잘리지 않는다', () => {
+    // 실제로 「공...」, 「2026-09-1...」 처럼 잘려 나온 적이 있다
+    expect(html).toContain('.info .label');
+    expect(html).toContain('.info .v-date');
+    // 말줄임은 값 칸에만 건다
+    const ellipsisBlock = html.slice(html.indexOf('.info .v-site,'), html.indexOf('.info .v-site,') + 200);
+    expect(ellipsisBlock).toContain('text-overflow: ellipsis');
+    expect(ellipsisBlock).not.toContain('.label');
+  });
 });
 
 describe('사진이 빠진 경우', () => {

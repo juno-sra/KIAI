@@ -173,11 +173,11 @@ function photoBlock(
     <div class="photo">${no}${body}</div>
     <table class="info">
       <tr>
-        <td class="label">공사명</td>
+        <td class="label l-site">공사명</td>
         <td class="v-site">${esc(options.siteName)}</td>
-        <td class="label">내용</td>
+        <td class="label l-subject">내용</td>
         <td class="v-subject">${esc(caption === '' ? subject : caption)}</td>
-        <td class="label">날짜</td>
+        <td class="label l-date">날짜</td>
         <td class="v-date">${esc(formatDateShort(options.date))}</td>
       </tr>
     </table>
@@ -349,19 +349,33 @@ h1 {
   line-height: ${(metrics.infoMm - 1).toFixed(1)}mm;
   vertical-align: middle;
 }
+/*
+ * 한 줄에 공사명·내용·날짜를 담는다.
+ * 라벨과 날짜는 절대 잘리면 안 되므로 폭을 넉넉히 준다. 실제로 「공...」,
+ * 「2026-09-1...」처럼 잘려 나온 적이 있다.
+ */
 .info .label {
-  width: ${ptToMm(PHOTO_LABEL_WIDTH_PT * 0.62).toFixed(1)}mm;
   background: #f2f2f2;
   font-weight: 600;
   text-align: center;
   white-space: nowrap;
 }
+.info .l-site { width: 9.5%; }
+.info .l-subject { width: 8%; }
+.info .l-date { width: 8%; }
 
-/* 한 줄에 공사명·내용·날짜를 담는다. 긴 현장명은 줄이지 않고 줄바꿈 없이 흘린다 */
-.info .v-site { width: 38%; }
-.info .v-subject { width: 26%; }
-.info .v-date { width: 16%; white-space: nowrap; text-align: center; }
-.info td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.info .v-site { width: 33%; }
+.info .v-subject { width: 24%; }
+.info .v-date { width: 17.5%; text-align: center; white-space: nowrap; }
+
+/* 값이 길면 말줄임 — 라벨과 날짜는 위에서 nowrap 으로 지켰다 */
+.info .v-site,
+.info .v-subject {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 </style>
 </head>
 <body>
