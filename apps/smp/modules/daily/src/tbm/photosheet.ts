@@ -22,8 +22,13 @@ import { ptToMm } from './render.js';
 export const PHOTO_SHEET_WIDTH_PT = 502.5;
 /** 설명표 라벨 폭 (pt) */
 export const PHOTO_LABEL_WIDTH_PT = 66;
-/** 설명표 한 행 높이 (pt) */
-export const INFO_ROW_HEIGHT_PT = 35;
+/**
+ * 설명표 높이 (mm).
+ *
+ * 표 셀 높이는 글자 크기와 안쪽 여백에 따라 결정되므로, 지정한 값이 그대로
+ * 나오지 않는다. 이 값은 실제 렌더링에서 확인한 높이다.
+ */
+export const INFO_HEIGHT_MM = 9.0;
 /** 페이지당 사진 수 */
 export const PHOTOS_PER_PAGE = 3;
 /** 설명표 행 수 — 한 면에 3장을 넣기 위해 공사명·내용·날짜를 한 줄에 담는다 */
@@ -40,8 +45,13 @@ export const MARGIN_BOTTOM_MM = 20;
 /** 좌우 여백 (mm) — 실측 46.5pt */
 export const MARGIN_SIDE_MM = 46.5 * (25.4 / 72);
 
-/** 제목 + 부제가 차지하는 높이 (mm) */
-export const TITLE_BLOCK_MM = 18.2;
+/**
+ * 제목 + 부제가 차지하는 높이 (mm).
+ *
+ * 브라우저에서 실제로 렌더링해 잰 값이다 (제목 6.6 + 여백 1.5 + 부제 3.9 + 여백 4.0).
+ * 눈대중으로 잡으면 남는 공간이 생겨 사진이 그만큼 작아진다.
+ */
+export const TITLE_BLOCK_MM = 16.0;
 
 /**
  * 사진 자리 최소 높이 (mm).
@@ -51,6 +61,15 @@ export const TITLE_BLOCK_MM = 18.2;
  * 만드는 설정도 지나간다.
  */
 export const MIN_PHOTO_HEIGHT_MM = 30;
+
+/**
+ * 안전 여유 (mm).
+ *
+ * 브라우저는 요소 높이를 소수점 아래에서 반올림하므로, 지정한 값보다 조금씩
+ * 커진다. 본문 높이를 딱 맞추면 0.1mm 초과로 마지막 표가 다음 면으로 밀리거나
+ * 잘려 사라진다. 실제로 그렇게 표 하나가 통째로 없어지는 일이 있었다.
+ */
+export const SAFETY_MARGIN_MM = 1.0;
 
 export interface SheetMetrics {
   /** 여백을 뺀 본문 높이 */
@@ -72,8 +91,8 @@ export function sheetMetrics(photosPerPage: number = PHOTOS_PER_PAGE): SheetMetr
   if (photosPerPage < 1) throw new Error('페이지당 사진 수는 1장 이상이어야 합니다.');
 
   const usableMm = PAGE_HEIGHT_MM - MARGIN_TOP_MM - MARGIN_BOTTOM_MM;
-  const blockMm = (usableMm - TITLE_BLOCK_MM) / photosPerPage;
-  const infoMm = INFO_ROW_HEIGHT_PT * INFO_ROWS * (25.4 / 72);
+  const blockMm = (usableMm - TITLE_BLOCK_MM - SAFETY_MARGIN_MM) / photosPerPage;
+  const infoMm = INFO_HEIGHT_MM;
   const photoMm = blockMm - infoMm;
 
   if (photoMm < MIN_PHOTO_HEIGHT_MM) {
@@ -311,13 +330,19 @@ h1 {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+  height: ${metrics.infoMm.toFixed(1)}mm;
   margin-top: 0;
 }
 .info td {
   border: 0.5pt solid #000;
   border-top: none;
-  padding: 1.5mm 2.5mm;
-  height: ${(metrics.infoMm / 2).toFixed(1)}mm;
+  /*
+   * 셀 높이는 글자 크기와 안쪽 여백으로 결정된다. 높이를 직접 지정해도
+   * 내용이 더 크면 밀려나므로, line-height로 잡아 정확히 맞춘다.
+   */
+  padding: 0 2.5mm;
+  height: ${metrics.infoMm.toFixed(1)}mm;
+  line-height: ${(metrics.infoMm - 1).toFixed(1)}mm;
   vertical-align: middle;
 }
 .info .label {

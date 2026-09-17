@@ -6,6 +6,8 @@ import {
   PHOTO_SHEET_WIDTH_PT,
   MIN_PHOTO_HEIGHT_MM,
   PHOTOS_PER_PAGE,
+  SAFETY_MARGIN_MM,
+  TITLE_BLOCK_MM,
   formatDateShort,
   renderPhotoSheet,
   sheetMetrics,
@@ -30,24 +32,36 @@ describe('여백과 사진 크기', () => {
     expect(sheetMetrics(2).usableMm).toBeCloseTo(252.0, 1);
   });
 
-  it('제목을 뺀 나머지를 장수로 균등 분할한다', () => {
+  it('제목과 안전 여유를 뺀 나머지를 장수로 균등 분할한다', () => {
     const m = sheetMetrics(3);
-    // (252 - 제목 18.2) / 3
-    expect(m.blockMm).toBeCloseTo(77.9, 1);
-    expect(m.infoMm).toBeCloseTo(12.3, 1);
-    expect(m.photoMm).toBeCloseTo(65.6, 1);
+    // (252 - 제목 16.0 - 여유 1.0) / 3
+    expect(m.blockMm).toBeCloseTo(78.33, 1);
+    expect(m.infoMm).toBeCloseTo(9.0, 1);
+    expect(m.photoMm).toBeCloseTo(69.33, 1);
+  });
+
+  it('제목 높이는 실측값이다', () => {
+    // 눈대중으로 잡으면 남는 공간이 생겨 사진이 그만큼 작아진다
+    expect(TITLE_BLOCK_MM).toBe(16.0);
+  });
+
+  it('안전 여유를 둔다 — 반올림으로 마지막 표가 잘리는 것을 막는다', () => {
+    expect(SAFETY_MARGIN_MM).toBe(1.0);
+    const withMargin = sheetMetrics(3);
+    // 본문이 인쇄 영역보다 작아야 한다
+    const used = TITLE_BLOCK_MM + withMargin.blockMm * 3;
+    expect(used).toBeLessThan(withMargin.usableMm);
   });
 
   it('설명표를 한 줄로 줄여 사진 자리를 확보한다', () => {
     // 두 줄이면 사진이 53mm까지 작아져 현장 상황을 확인하기 어렵다
     const m = sheetMetrics(3);
-    expect(m.infoMm).toBeLessThan(13);
-    expect(m.photoMm).toBeGreaterThan(60);
+    expect(m.photoMm).toBeGreaterThan(65);
   });
 
   it('장수를 바꾸면 사진 크기가 따라간다', () => {
-    expect(sheetMetrics(1).photoMm).toBeCloseTo(221.5, 1);
-    expect(sheetMetrics(2).photoMm).toBeCloseTo(104.6, 1);
+    expect(sheetMetrics(1).photoMm).toBeCloseTo(226.0, 1);
+    expect(sheetMetrics(2).photoMm).toBeCloseTo(108.5, 1);
   });
 
   it('사진이 너무 작아지는 설정을 거부한다', () => {
@@ -56,9 +70,10 @@ describe('여백과 사진 크기', () => {
   });
 
   it('최소 기준을 넘는 장수까지는 허용한다', () => {
-    expect(() => sheetMetrics(5)).not.toThrow();
-    expect(sheetMetrics(5).photoMm).toBeGreaterThanOrEqual(30);
-    expect(() => sheetMetrics(6)).toThrow();
+    // 설명표를 한 줄로 줄인 덕에 6장까지 가능하다
+    expect(() => sheetMetrics(6)).not.toThrow();
+    expect(sheetMetrics(6).photoMm).toBeGreaterThanOrEqual(30);
+    expect(() => sheetMetrics(7)).toThrow();
   });
 
   it('0장 이하는 거부한다', () => {
@@ -73,7 +88,7 @@ describe('여백과 사진 크기', () => {
     const html = renderPhotoSheet({ ...base, photos: onePhoto });
     expect(html).toContain('margin: 25mm');
     expect(html).toContain('20mm;');
-    expect(html).toContain('65.6mm');
+    expect(html).toContain('69.3mm');
   });
 
   it('인쇄 폭은 실측값을 유지한다', () => {
