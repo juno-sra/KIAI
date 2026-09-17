@@ -17,7 +17,8 @@
     "typecheck": "tsc --build --force",
     "demo": "npm run build && node tools/demo.mjs",
     "sample:tbm": "npm run build && node tools/sample-tbm.mjs",
-    "verify:print": "npm run build && node tools/verify-print.mjs"
+    "verify:print": "npm run build && node tools/verify-print.mjs",
+    "pdf": "node tools/to-pdf.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
