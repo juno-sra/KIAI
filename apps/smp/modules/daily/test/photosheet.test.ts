@@ -4,7 +4,9 @@ import {
   MARGIN_TOP_MM,
   PHOTO_PADDING_PX,
   PHOTO_SHEET_WIDTH_PT,
+  MIN_PHOTO_HEIGHT_MM,
   PHOTOS_PER_PAGE,
+  formatDateShort,
   renderPhotoSheet,
   sheetMetrics,
 } from '../src/tbm/photosheet.js';
@@ -29,32 +31,49 @@ describe('여백과 사진 크기', () => {
   });
 
   it('제목을 뺀 나머지를 장수로 균등 분할한다', () => {
-    const m = sheetMetrics(2);
-    // (252 - 제목 18.2) / 2
-    expect(m.blockMm).toBeCloseTo(116.9, 1);
-    expect(m.infoMm).toBeCloseTo(24.7, 1);
-    expect(m.photoMm).toBeCloseTo(92.2, 1);
+    const m = sheetMetrics(3);
+    // (252 - 제목 18.2) / 3
+    expect(m.blockMm).toBeCloseTo(77.9, 1);
+    expect(m.infoMm).toBeCloseTo(12.3, 1);
+    expect(m.photoMm).toBeCloseTo(65.6, 1);
+  });
+
+  it('설명표를 한 줄로 줄여 사진 자리를 확보한다', () => {
+    // 두 줄이면 사진이 53mm까지 작아져 현장 상황을 확인하기 어렵다
+    const m = sheetMetrics(3);
+    expect(m.infoMm).toBeLessThan(13);
+    expect(m.photoMm).toBeGreaterThan(60);
   });
 
   it('장수를 바꾸면 사진 크기가 따라간다', () => {
-    expect(sheetMetrics(1).photoMm).toBeCloseTo(209.1, 1);
-    expect(sheetMetrics(3).photoMm).toBeCloseTo(53.2, 1);
+    expect(sheetMetrics(1).photoMm).toBeCloseTo(221.5, 1);
+    expect(sheetMetrics(2).photoMm).toBeCloseTo(104.6, 1);
   });
 
-  it('사진이 들어갈 자리가 없으면 거부한다', () => {
-    // 한 면에 너무 많이 넣으려 하면 설명표만 남는다
-    expect(() => sheetMetrics(10)).toThrow(/사진 자리가 남지 않습니다/);
+  it('사진이 너무 작아지는 설정을 거부한다', () => {
+    // 자리가 0보다 크기만 하면 통과시키면 11mm짜리 사진도 지나간다
+    expect(() => sheetMetrics(10)).toThrow(/최소 기준 30mm에 못 미칩니다/);
+  });
+
+  it('최소 기준을 넘는 장수까지는 허용한다', () => {
+    expect(() => sheetMetrics(5)).not.toThrow();
+    expect(sheetMetrics(5).photoMm).toBeGreaterThanOrEqual(30);
+    expect(() => sheetMetrics(6)).toThrow();
   });
 
   it('0장 이하는 거부한다', () => {
     expect(() => sheetMetrics(0)).toThrow(/1장 이상/);
   });
 
+  it('최소 사진 높이 기준이 30mm다', () => {
+    expect(MIN_PHOTO_HEIGHT_MM).toBe(30);
+  });
+
   it('계산값을 인쇄 여백과 높이에 넣는다', () => {
     const html = renderPhotoSheet({ ...base, photos: onePhoto });
     expect(html).toContain('margin: 25mm');
     expect(html).toContain('20mm;');
-    expect(html).toContain('92.2mm');
+    expect(html).toContain('65.6mm');
   });
 
   it('인쇄 폭은 실측값을 유지한다', () => {
@@ -78,9 +97,9 @@ describe('서식 항목', () => {
   });
 
   it('공사명·내용·날짜 표를 그린다', () => {
-    expect(html).toContain('공 사 명');
+    expect(html).toContain('공사명');
     expect(html).toContain(base.siteName);
-    expect(html).toContain('2026년 9월 17일 목요일');
+    expect(html).toContain('2026-09-17 (목)');
   });
 
   it('사진 설명을 내용 칸에 넣는다', () => {
@@ -96,40 +115,42 @@ describe('서식 항목', () => {
   });
 });
 
-describe('페이지당 2장', () => {
-  const four = ['a', 'b', 'c', 'd'].map((h) => ({ sha256: h, ext: '.jpg' }));
-  const sources = Object.fromEntries(four.map((p) => [p.sha256, `data:image/jpeg;base64,${p.sha256}`]));
+describe('페이지당 3장', () => {
+  const seven = ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map((h) => ({ sha256: h, ext: '.jpg' }));
+  const sources = Object.fromEntries(
+    seven.map((p) => [p.sha256, `data:image/jpeg;base64,${p.sha256}`]),
+  );
 
-  it('기본값이 2장이다', () => {
-    expect(PHOTOS_PER_PAGE).toBe(2);
+  it('기본값이 3장이다', () => {
+    expect(PHOTOS_PER_PAGE).toBe(3);
   });
 
-  it('두 장씩 묶어 면을 만든다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: four });
+  it('세 장씩 묶어 면을 만든다', () => {
+    const html = renderPhotoSheet({ ...base, sources, photos: seven.slice(0, 6) });
     expect(html.match(/class="sheet"/g)).toHaveLength(2);
-    expect(html.match(/class="block"/g)).toHaveLength(4);
+    expect(html.match(/class="block"/g)).toHaveLength(6);
   });
 
-  it('홀수면 마지막 면에 한 장만 넣는다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: four.slice(0, 3) });
-    expect(html.match(/class="sheet"/g)).toHaveLength(2);
-    expect(html.match(/class="block"/g)).toHaveLength(3);
+  it('나누어떨어지지 않으면 마지막 면에 남은 장수만 넣는다', () => {
+    const html = renderPhotoSheet({ ...base, sources, photos: seven });
+    expect(html.match(/class="sheet"/g)).toHaveLength(3);
+    expect(html.match(/class="block"/g)).toHaveLength(7);
   });
 
   it('면 번호를 매긴다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: four });
-    expect(html).toContain('(1/2)');
-    expect(html).toContain('(2/2)');
+    const html = renderPhotoSheet({ ...base, sources, photos: seven });
+    expect(html).toContain('(1/3)');
+    expect(html).toContain('(3/3)');
   });
 
   it('한 면으로 끝나면 번호를 붙이지 않는다', () => {
-    const html = renderPhotoSheet({ ...base, photos: onePhoto });
+    const html = renderPhotoSheet({ ...base, sources, photos: seven.slice(0, 3) });
     expect(html).not.toContain('(1/1)');
   });
 
   it('사진마다 번호를 표시한다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: four });
-    expect(html.match(/class="no"/g)).toHaveLength(4);
+    const html = renderPhotoSheet({ ...base, sources, photos: seven });
+    expect(html.match(/class="no"/g)).toHaveLength(7);
   });
 
   it('한 장뿐이면 번호를 붙이지 않는다', () => {
@@ -137,18 +158,42 @@ describe('페이지당 2장', () => {
   });
 
   it('페이지당 장수를 바꿀 수 있다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: four, photosPerPage: 1 });
-    expect(html.match(/class="sheet"/g)).toHaveLength(4);
+    const html = renderPhotoSheet({ ...base, sources, photos: seven.slice(0, 4), photosPerPage: 2 });
+    expect(html.match(/class="sheet"/g)).toHaveLength(2);
   });
 
   it('렌더러도 0장 이하를 거부한다', () => {
     expect(() =>
-      renderPhotoSheet({ ...base, sources, photos: four, photosPerPage: 0 }),
+      renderPhotoSheet({ ...base, sources, photos: seven, photosPerPage: 0 }),
     ).toThrow(/1장 이상/);
   });
 
   it('면마다 새 페이지에 인쇄한다', () => {
     expect(renderPhotoSheet({ ...base, photos: onePhoto })).toContain('page-break-after: always');
+  });
+});
+
+describe('설명표 한 줄 구성', () => {
+  const html = renderPhotoSheet({ ...base, photos: onePhoto });
+
+  it('공사명·내용·날짜를 한 줄에 담는다', () => {
+    expect(html).toContain('공사명');
+    expect(html).toContain('내용');
+    expect(html).toContain('날짜');
+    expect(html.match(/<tr>/g)).toHaveLength(1);
+  });
+
+  it('날짜를 짧게 적는다 — 한 줄에 들어가야 한다', () => {
+    expect(formatDateShort('2026-09-17')).toBe('2026-09-17 (목)');
+    expect(html).toContain('2026-09-17 (목)');
+  });
+
+  it('형식이 아닌 날짜는 그대로 둔다', () => {
+    expect(formatDateShort('날짜미정')).toBe('날짜미정');
+  });
+
+  it('긴 현장명이 줄을 밀어내지 않게 한다', () => {
+    expect(html).toContain('text-overflow: ellipsis');
   });
 });
 

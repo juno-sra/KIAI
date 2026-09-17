@@ -8,12 +8,15 @@
  * 높이는 고정 상수가 아니라 이 분할에서 계산된다. 여백이나 장수를 바꾸면
  * 사진 크기가 자동으로 따라간다.
  *
+ * 한 면에 3장을 넣기 위해 설명표를 한 줄로 줄였다. 두 줄이면 사진이 53mm까지
+ * 작아져 현장 상황을 확인하기 어렵다.
+ *
  * 실측 참고값
  *   인쇄 폭 502.5pt (약 177.3mm)
  *   설명표 라벨 폭 66pt (약 23.3mm), 행 높이 35pt
  */
 import type { TbmPhoto } from './types.js';
-import { formatDateKo, ptToMm } from './render.js';
+import { ptToMm } from './render.js';
 
 /** 실측 인쇄 폭 (pt) */
 export const PHOTO_SHEET_WIDTH_PT = 502.5;
@@ -22,7 +25,9 @@ export const PHOTO_LABEL_WIDTH_PT = 66;
 /** 설명표 한 행 높이 (pt) */
 export const INFO_ROW_HEIGHT_PT = 35;
 /** 페이지당 사진 수 */
-export const PHOTOS_PER_PAGE = 2;
+export const PHOTOS_PER_PAGE = 3;
+/** 설명표 행 수 — 한 면에 3장을 넣기 위해 공사명·내용·날짜를 한 줄에 담는다 */
+export const INFO_ROWS = 1;
 /** 사진 상하 여백 (px) — 테두리에 딱 붙지 않게 한다 */
 export const PHOTO_PADDING_PX = 5;
 
@@ -37,6 +42,15 @@ export const MARGIN_SIDE_MM = 46.5 * (25.4 / 72);
 
 /** 제목 + 부제가 차지하는 높이 (mm) */
 export const TITLE_BLOCK_MM = 18.2;
+
+/**
+ * 사진 자리 최소 높이 (mm).
+ *
+ * 이보다 작으면 현장 상황을 확인할 수 없어 사진대지의 목적을 잃는다.
+ * 자리가 0보다 크기만 하면 통과시키면, 한 면에 10장을 넣어 11mm짜리 사진을
+ * 만드는 설정도 지나간다.
+ */
+export const MIN_PHOTO_HEIGHT_MM = 30;
 
 export interface SheetMetrics {
   /** 여백을 뺀 본문 높이 */
@@ -59,13 +73,14 @@ export function sheetMetrics(photosPerPage: number = PHOTOS_PER_PAGE): SheetMetr
 
   const usableMm = PAGE_HEIGHT_MM - MARGIN_TOP_MM - MARGIN_BOTTOM_MM;
   const blockMm = (usableMm - TITLE_BLOCK_MM) / photosPerPage;
-  const infoMm = INFO_ROW_HEIGHT_PT * 2 * (25.4 / 72);
+  const infoMm = INFO_ROW_HEIGHT_PT * INFO_ROWS * (25.4 / 72);
   const photoMm = blockMm - infoMm;
 
-  if (photoMm <= 0) {
+  if (photoMm < MIN_PHOTO_HEIGHT_MM) {
     throw new Error(
-      `여백과 장수가 맞지 않습니다. 본문 ${usableMm.toFixed(1)}mm에 ` +
-        `${photosPerPage}장을 넣으면 사진 자리가 남지 않습니다.`,
+      `한 면에 ${photosPerPage}장을 넣으면 사진 높이가 ${photoMm.toFixed(1)}mm가 되어 ` +
+        `최소 기준 ${MIN_PHOTO_HEIGHT_MM}mm에 못 미칩니다. ` +
+        `현장 상황을 확인할 수 없는 크기이므로 장수를 줄이거나 여백을 조정하십시오.`,
     );
   }
 
@@ -100,6 +115,15 @@ export interface PhotoSheetOptions {
 
 const DEFAULT_FONT_CSS = `@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');`;
 
+const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토'];
+
+/** 한 줄 표에 들어가도록 짧게 — 2026-09-17 (목) */
+export function formatDateShort(date: string): string {
+  const d = new Date(`${date}T00:00:00`);
+  if (Number.isNaN(d.getTime())) return date;
+  return `${date} (${WEEKDAYS[d.getDay()]})`;
+}
+
 function esc(value: string): string {
   return value
     .replace(/&/g, '&amp;')
@@ -131,14 +155,12 @@ function photoBlock(
     <div class="photo">${no}${body}</div>
     <table class="info">
       <tr>
-        <td class="label">공 사 명</td>
-        <td colspan="3">${esc(options.siteName)}</td>
-      </tr>
-      <tr>
-        <td class="label">내　　용</td>
-        <td>${esc(caption === '' ? subject : caption)}</td>
-        <td class="label">날　　짜</td>
-        <td>${esc(formatDateKo(options.date))}</td>
+        <td class="label">공사명</td>
+        <td class="v-site">${esc(options.siteName)}</td>
+        <td class="label">내용</td>
+        <td class="v-subject">${esc(caption === '' ? subject : caption)}</td>
+        <td class="label">날짜</td>
+        <td class="v-date">${esc(formatDateShort(options.date))}</td>
       </tr>
     </table>
   </div>`;
@@ -299,11 +321,18 @@ h1 {
   vertical-align: middle;
 }
 .info .label {
-  width: ${ptToMm(PHOTO_LABEL_WIDTH_PT).toFixed(1)}mm;
+  width: ${ptToMm(PHOTO_LABEL_WIDTH_PT * 0.62).toFixed(1)}mm;
   background: #f2f2f2;
   font-weight: 600;
   text-align: center;
+  white-space: nowrap;
 }
+
+/* 한 줄에 공사명·내용·날짜를 담는다. 긴 현장명은 줄이지 않고 줄바꿈 없이 흘린다 */
+.info .v-site { width: 38%; }
+.info .v-subject { width: 26%; }
+.info .v-date { width: 16%; white-space: nowrap; text-align: center; }
+.info td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 </style>
 </head>
 <body>
