@@ -6,6 +6,7 @@
   "description": "SMP (Safety Management Program) — 건설현장 안전관리 모듈 조합형 데스크톱 프로그램",
   "workspaces": [
     "packages/*",
+    "modules/*",
     "desktop"
   ],
   "scripts": {
@@ -14,7 +15,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --build --force",
-    "demo": "npm run build && node tools/demo.mjs"
+    "demo": "npm run build && node tools/demo.mjs",
+    "sample:tbm": "npm run build && node tools/sample-tbm.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
