@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "PIPE",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-PIPE-001",
+      "task": "관로 매설 굴착",
+      "hazard": "좁고 깊은 트렌치에서 흙막이 없이 작업 중 붕괴로 매몰",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ENG", "text": "트렌치 박스·흙막이 설치 또는 기울기 확보" },
+        { "type": "ADMIN", "text": "깊이 1.5m 이상 시 흙막이 설치 원칙 준수 및 승강설비 설치" },
+        { "type": "ADMIN", "text": "작업 전·중 굴착면 점검" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제338조(지반 등의 굴착 시 위험 방지) 및 별표 11", "같은 규칙 제345조(흙막이지보공의 재료)", "같은 규칙 제46조(승강설비의 설치)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["흙막이 설치", "굴착 깊이", "승강설비", "점검 기록"],
+      "keywords": ["트렌치", "관로", "매몰", "흙막이"]
+    },
+    {
+      "id": "HZ-PIPE-002",
+      "task": "관 부설",
+      "hazard": "관 인양·거치 중 관이 굴러 협착",
+      "accidentTypes": ["CAUGHT", "HIT"],
+      "controls": [
+        { "type": "ENG", "text": "전용 인양기구 사용 및 구름방지 고임목 설치" },
+        { "type": "ADMIN", "text": "관 직하부 작업 금지 및 신호수 배치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제20조(출입의 금지 등)", "같은 규칙 제163조(와이어로프 등 달기구의 안전계수)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["인양기구", "고임목", "직하부 접근"],
+      "keywords": ["관부설", "구름", "협착"]
+    },
+    {
+      "id": "HZ-PIPE-003",
+      "task": "기존 관로 내부 작업",
+      "hazard": "하수관 내 황화수소·메탄 발생으로 질식·폭발",
+      "accidentTypes": ["ASPHY", "EXPLO"],
+      "controls": [
+        { "type": "ADMIN", "text": "밀폐공간 작업 프로그램 적용, 진입 전 농도 측정" },
+        { "type": "ENG", "text": "강제 환기 및 방폭형 장비 사용" },
+        { "type": "ADMIN", "text": "감시인 배치 및 구조장비 비치" },
+        { "type": "PPE", "text": "송기마스크·안전대·구명줄 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제619조(밀폐공간 작업 프로그램의 수립·시행)", "같은 규칙 제620조(환기 등)", "같은 규칙 제623조(감시인의 배치 등)", "같은 규칙 제626조(구출 시 공기호흡기 또는 송기마스크의 사용)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["농도 측정", "환기", "감시인", "구조장비"],
+      "keywords": ["하수관", "황화수소", "질식", "밀폐공간"]
+    },
+    {
+      "id": "HZ-PIPE-004",
+      "task": "관로 되메우기",
+      "hazard": "다짐장비와 트렌치 내 작업자 접촉",
+      "accidentTypes": ["STRIKE", "CAUGHT"],
+      "controls": [
+        { "type": "ADMIN", "text": "다짐 중 트렌치 내 작업자 철수" },
+        { "type": "ADMIN", "text": "유도자 배치 및 상호 신호" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제200조(접촉의 방지)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["철수 확인", "유도자"],
+      "keywords": ["되메우기", "다짐", "접촉"]
+    },
+    {
+      "id": "HZ-PIPE-005",
+      "task": "수압시험",
+      "hazard": "시험 중 관 이음부 파열로 부재 비산",
+      "accidentTypes": ["EXPLO", "HIT"],
+      "controls": [
+        { "type": "ENG", "text": "단계적 가압 및 이음부 고정" },
+        { "type": "ADMIN", "text": "가압 중 접근 금지 구역 설정 및 감시" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제285조(압력의 제한)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 1,
+      "checkItems": ["가압 단계", "접근금지 구역", "이음부 고정"],
+      "keywords": ["수압시험", "파열", "가압"]
+    }
+  ]
+}

@@ -124,7 +124,14 @@ for (const [code, n] of [...byWorkType].sort((a, b) => b[1] - a[1])) {
   const name = taxonomy.workTypes.find((w) => w.code === code)?.name ?? code;
   console.log(`  ${code.padEnd(8)} ${String(n).padStart(3)}건  ${name}`);
 }
-console.log('');
+// taxonomy에 있으나 데이터가 없는 공종 안내
+const missing = taxonomy.workTypes.filter((w) => !byWorkType.has(w.code));
+if (missing.length) {
+  console.log('데이터가 아직 없는 공종:');
+  for (const w of missing) console.log(`  · ${w.code.padEnd(8)} ${w.name}`);
+  console.log('  (다른 파일이 해당 작업을 포함할 수 있음 — README의 매핑표 참조)');
+  console.log('');
+}
 
 if (warnings.length) {
   console.log(`경고 ${warnings.length}건:`);

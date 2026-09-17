@@ -25,6 +25,33 @@ data/hazard-library/
   validate.mjs            형식·조문 검증 스크립트
 ```
 
+## 파일 ↔ 공종 매핑
+
+한 파일이 여러 공종의 작업을 함께 담는 경우가 있다. 검증 스크립트가 "데이터가 없는
+공종"으로 표시하는 코드는 아래 파일이 실질적으로 포함하고 있다.
+
+| 파일 | 대표 공종코드 | 함께 포함하는 공종 |
+|---|---|---|
+| `common.json` | COMMON | 전 공종 공통 |
+| `temp-works.json` | TEMP | 가설통로, 고소작업대 |
+| `earthwork.json` | EXCV | 성토·다짐, 토사운반 |
+| `earth-retaining.json` | EARTH | 어스앵커, 계측관리 |
+| `pile-foundation.json` | PILE | 항타·천공·현장타설말뚝 |
+| `formwork-concrete.json` | FORM | **REBAR**(철근), **CONC**(콘크리트 타설) |
+| `steel-welding.json` | STEEL | **WELD**(용접·화기), 데크플레이트 |
+| `lifting.json` | LIFT | 타워크레인, 리프트, 줄걸이 |
+| `machinery.json` | MACH | 지게차, 항타기, 장비 정비 |
+| `electrical.json` | ELEC | 가설전기, 정전·활선작업 |
+| `finishing.json` | MASON | **WATERP**(방수), **PAINT**(도장), **WINDOW**(창호), **ROOF**(지붕), **INTER**(내장) |
+| `confined-demolition.json` | CONFIN | **DEMO**(해체·철거), 석면 해체 |
+| `plumbing-hvac.json` | PLUMB | 덕트, 기계실, 시운전 |
+| `road-pavement.json` | ROAD | 아스팔트 포장, 야간 도로작업 |
+| `pipeline.json` | PIPE | 트렌치 굴착, 하수관 내부작업 |
+| `hazmat.json` | HAZMAT | MSDS, 작업환경측정, 특수건강진단 |
+| `landscape.json` | LAND | 식재, 전정, 예초 |
+
+세부 공종이 늘어나면 별도 파일로 분리한다.
+
 ## 법적 근거
 
 | 용도 | 근거 |
@@ -54,3 +81,12 @@ data/hazard-library/
 - 조문이 확인되지 않은 항목은 `legalBasis`에 `"근거 확인 불가"`로 표기한다.
 
 이 한계는 SMP 화면과 출력물에도 표시한다.
+
+## 검증
+
+```bash
+node data/hazard-library/validate.mjs
+```
+
+id 중복, 분류 코드 정합성, 근거 누락, 보호구만으로 구성된 대책(제거·대체·공학적
+통제를 검토하지 않은 경우)을 검사한다. 오류가 있으면 종료코드 1로 끝난다.

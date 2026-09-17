@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "PLUMB",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-PLUMB-001",
+      "task": "천장 배관 설치",
+      "hazard": "천장 고소작업 중 작업대에서 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "SUBST", "text": "사다리 대신 이동식비계·고소작업대 사용" },
+        { "type": "ENG", "text": "작업대 난간 설치 및 바퀴 고정" },
+        { "type": "PPE", "text": "안전대 체결" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제42조(추락의 방지)", "같은 규칙 제68조(이동식비계)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["작업대 종류", "난간", "바퀴 고정", "안전대"],
+      "keywords": ["천장", "배관", "추락"]
+    },
+    {
+      "id": "HZ-PLUMB-002",
+      "task": "덕트·배관 인양",
+      "hazard": "장척 자재 취급 중 균형 상실로 낙하·충돌",
+      "accidentTypes": ["HIT", "ERGO"],
+      "controls": [
+        { "type": "ENG", "text": "인양기구·리프트 사용, 2점 결속" },
+        { "type": "ADMIN", "text": "2인 이상 운반 및 하부 통제" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제663조(중량물 취급)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["인양기구", "운반 인원", "하부 통제"],
+      "keywords": ["덕트", "장척물", "인양"]
+    },
+    {
+      "id": "HZ-PLUMB-003",
+      "task": "배관 용접·납땜",
+      "hazard": "좁은 공간 화기작업으로 화재 및 흄 흡입",
+      "accidentTypes": ["FIRE", "DUST"],
+      "controls": [
+        { "type": "ELIM", "text": "가연물 제거 및 무화기 공법 검토" },
+        { "type": "ENG", "text": "국소배기 또는 강제환기, 방화포·소화기 비치" },
+        { "type": "ADMIN", "text": "화기작업 허가 및 화재감시자 배치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제241조(화재위험작업 시의 조치)", "같은 규칙 제241조의2(화재감시자)", "같은 규칙 제607조(국소배기장치의 설치)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["가연물", "환기", "소화기", "화재감시자"],
+      "keywords": ["배관용접", "납땜", "화재"]
+    },
+    {
+      "id": "HZ-PLUMB-004",
+      "task": "기계실 장비 반입·설치",
+      "hazard": "중량 장비 이동 중 전도 또는 협착",
+      "accidentTypes": ["ROLLOVER", "CAUGHT"],
+      "controls": [
+        { "type": "ENG", "text": "전용 운반장비·유압대차 사용 및 이동경로 확보" },
+        { "type": "ADMIN", "text": "작업지휘자 지정 및 단계별 신호" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제663조(중량물 취급)", "같은 규칙 제39조(작업지휘자의 지정)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["운반장비", "이동경로", "작업지휘자"],
+      "keywords": ["기계실", "중량장비", "전도"]
+    },
+    {
+      "id": "HZ-PLUMB-005",
+      "task": "시운전",
+      "hazard": "회전체·구동부 시운전 중 끼임",
+      "accidentTypes": ["CAUGHT"],
+      "controls": [
+        { "type": "ENG", "text": "방호덮개 설치 후 시운전" },
+        { "type": "ADMIN", "text": "시운전 전 인원 철수 확인 및 전원 잠금 절차 운영" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제87조(원동기·회전축 등의 위험 방지)", "같은 규칙 제92조(정비 등의 작업 시의 운전정지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["방호덮개", "인원 철수", "전원 잠금"],
+      "keywords": ["시운전", "회전체", "끼임"]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "HAZMAT",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-HAZMAT-001",
+      "task": "화학물질 취급",
+      "hazard": "MSDS 미확인 물질 사용으로 중독·화상",
+      "accidentTypes": ["CHEM"],
+      "controls": [
+        { "type": "ADMIN", "text": "반입 전 MSDS 확보·게시 및 취급 근로자 교육" },
+        { "type": "ENG", "text": "용기에 경고표지 부착 및 지정 장소 보관" },
+        { "type": "PPE", "text": "물질별 적합한 보호구 지급·착용" }
+      ],
+      "legalBasis": ["산업안전보건법 제110조(물질안전보건자료의 작성 및 제출)", "같은 법 제114조(물질안전보건자료의 게시 및 교육)", "같은 법 제115조(물질안전보건자료대상물질 용기 등의 경고표시)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["MSDS 게시", "경고표지", "보호구 적합성", "교육 기록"],
+      "keywords": ["MSDS", "화학물질", "경고표지"]
+    },
+    {
+      "id": "HZ-HAZMAT-002",
+      "task": "유해물질 보관",
+      "hazard": "인화성 물질을 부적절한 장소에 보관해 화재·폭발",
+      "accidentTypes": ["FIRE", "EXPLO"],
+      "controls": [
+        { "type": "ENG", "text": "전용 위험물 보관소 설치, 환기·방폭 조치 및 소화기 비치" },
+        { "type": "ADMIN", "text": "보관 수량 제한 및 화기 반입 금지 표지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제232조(폭발 또는 화재 등의 예방)", "같은 규칙 제236조(화재 위험이 있는 작업의 장소 등)", "같은 규칙 제289조(위험물 등의 취급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["보관소 상태", "환기", "소화기", "수량"],
+      "keywords": ["인화성", "위험물", "보관"]
+    },
+    {
+      "id": "HZ-HAZMAT-003",
+      "task": "유해물질 취급 작업",
+      "hazard": "작업환경측정 미실시로 노출 수준을 모른 채 작업",
+      "accidentTypes": ["CHEM", "DUST"],
+      "controls": [
+        { "type": "ADMIN", "text": "대상 여부 확인 후 작업환경측정 실시 및 결과 근로자 통보" },
+        { "type": "ENG", "text": "측정 결과에 따라 국소배기 등 개선 조치" }
+      ],
+      "legalBasis": ["산업안전보건법 제125조(작업환경측정)", "같은 법 제126조(작업환경측정기관)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["측정 대상 여부", "측정 주기", "결과 통보"],
+      "keywords": ["작업환경측정", "노출"]
+    },
+    {
+      "id": "HZ-HAZMAT-004",
+      "task": "유해물질 취급 근로자 관리",
+      "hazard": "특수건강진단 미실시로 직업병 조기 발견 실패",
+      "accidentTypes": ["OTHER"],
+      "controls": [
+        { "type": "ADMIN", "text": "대상자 파악 후 배치 전·정기 특수건강진단 실시" },
+        { "type": "ADMIN", "text": "유소견자 사후관리 조치 이행" }
+      ],
+      "legalBasis": ["산업안전보건법 제130조(특수건강진단 등)", "같은 법 제132조(건강진단에 관한 사후조치 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["대상자 명부", "진단 실시", "사후관리"],
+      "keywords": ["특수건강진단", "직업병"]
+    },
+    {
+      "id": "HZ-HAZMAT-005",
+      "task": "폐기물 처리",
+      "hazard": "지정폐기물 혼합 보관·처리로 유해물질 누출",
+      "accidentTypes": ["CHEM"],
+      "controls": [
+        { "type": "ENG", "text": "종류별 분리 보관 용기 및 차수 조치" },
+        { "type": "ADMIN", "text": "허가업체 위탁 처리 및 인계서 관리" }
+      ],
+      "legalBasis": ["폐기물관리법 제18조(사업장폐기물의 처리)", "같은 법 제17조(사업장폐기물배출자의 의무 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["분리 보관", "차수 조치", "인계서"],
+      "keywords": ["지정폐기물", "누출", "위탁처리"]
+    }
+  ]
+}
