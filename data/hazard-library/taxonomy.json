@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-17",
+  "workTypes": [
+    { "code": "COMMON", "name": "현장 공통", "group": "공통" },
+    { "code": "TEMP",   "name": "가설공사(비계·작업발판·가설통로)", "group": "가설" },
+    { "code": "LIFT",   "name": "양중작업(크레인·리프트·곤돌라)", "group": "가설" },
+    { "code": "EXCV",   "name": "토공·굴착", "group": "토목" },
+    { "code": "EARTH",  "name": "흙막이·지반보강", "group": "토목" },
+    { "code": "PILE",   "name": "기초·파일", "group": "토목" },
+    { "code": "ROAD",   "name": "도로·포장", "group": "토목" },
+    { "code": "PIPE",   "name": "상하수도·관로", "group": "토목" },
+    { "code": "REBAR",  "name": "철근공사", "group": "구조" },
+    { "code": "FORM",   "name": "거푸집·동바리", "group": "구조" },
+    { "code": "CONC",   "name": "콘크리트 타설", "group": "구조" },
+    { "code": "STEEL",  "name": "철골공사", "group": "구조" },
+    { "code": "DEMO",   "name": "해체·철거", "group": "구조" },
+    { "code": "MASON",  "name": "조적·미장", "group": "마감" },
+    { "code": "WATERP", "name": "방수", "group": "마감" },
+    { "code": "PAINT",  "name": "도장", "group": "마감" },
+    { "code": "WINDOW", "name": "창호·유리", "group": "마감" },
+    { "code": "ROOF",   "name": "지붕·외장", "group": "마감" },
+    { "code": "INTER",  "name": "내장·경량철골", "group": "마감" },
+    { "code": "ELEC",   "name": "전기공사", "group": "설비" },
+    { "code": "PLUMB",  "name": "기계설비·배관", "group": "설비" },
+    { "code": "WELD",   "name": "용접·화기작업", "group": "설비" },
+    { "code": "CONFIN", "name": "밀폐공간 작업", "group": "특수" },
+    { "code": "MACH",   "name": "차량계 건설기계", "group": "특수" },
+    { "code": "HAZMAT", "name": "석면·유해물질", "group": "특수" },
+    { "code": "LAND",   "name": "조경", "group": "기타" }
+  ],
+  "accidentTypes": [
+    { "code": "FALL",     "name": "떨어짐" },
+    { "code": "SLIP",     "name": "넘어짐" },
+    { "code": "STRIKE",   "name": "부딪힘" },
+    { "code": "HIT",      "name": "물체에 맞음" },
+    { "code": "COLLAPSE", "name": "무너짐" },
+    { "code": "CAUGHT",   "name": "끼임" },
+    { "code": "ROLLOVER", "name": "깔림·뒤집힘" },
+    { "code": "CUT",      "name": "절단·베임·찔림" },
+    { "code": "SHOCK",    "name": "감전" },
+    { "code": "FIRE",     "name": "화재" },
+    { "code": "EXPLO",    "name": "폭발·파열" },
+    { "code": "CHEM",     "name": "화학물질 누출·접촉" },
+    { "code": "ASPHY",    "name": "산소결핍·질식" },
+    { "code": "DROWN",    "name": "빠짐·익사" },
+    { "code": "TEMP_EXP", "name": "이상온도 노출·접촉" },
+    { "code": "ERGO",     "name": "무리한 동작·근골격계" },
+    { "code": "TRAFFIC",  "name": "교통사고" },
+    { "code": "NOISE",    "name": "소음·진동" },
+    { "code": "DUST",     "name": "분진·흄 노출" },
+    { "code": "OTHER",    "name": "기타" }
+  ],
+  "controlTypes": [
+    { "code": "ELIM",   "name": "제거",     "order": 1, "desc": "위험요인 자체를 없앤다" },
+    { "code": "SUBST",  "name": "대체",     "order": 2, "desc": "덜 위험한 것으로 바꾼다" },
+    { "code": "ENG",    "name": "공학적 통제", "order": 3, "desc": "설비·시설로 위험을 차단한다" },
+    { "code": "ADMIN",  "name": "관리적 통제", "order": 4, "desc": "작업방법·절차·교육으로 통제한다" },
+    { "code": "PPE",    "name": "보호구",   "order": 5, "desc": "최후 수단. 앞의 대책을 대신할 수 없다" }
+  ],
+  "riskScales": {
+    "note": "「사업장 위험성평가에 관한 지침」은 평가 방법을 사업장 자율로 정하도록 한다. SMP는 아래 두 방식을 지원한다.",
+    "method3x3": {
+      "name": "빈도×강도 3단계",
+      "likelihood": [
+        { "value": 1, "label": "낮음", "desc": "연 1회 미만 또는 발생 사례 드묾" },
+        { "value": 2, "label": "보통", "desc": "가끔 발생 가능" },
+        { "value": 3, "label": "높음", "desc": "자주 발생 가능" }
+      ],
+      "severity": [
+        { "value": 1, "label": "경미", "desc": "응급처치 수준" },
+        { "value": 2, "label": "중대", "desc": "휴업 요하는 부상" },
+        { "value": 3, "label": "치명", "desc": "사망 또는 영구 장해" }
+      ],
+      "grades": [
+        { "min": 1, "max": 2, "label": "낮음", "action": "현 상태 유지, 주기적 확인" },
+        { "min": 3, "max": 4, "label": "보통", "action": "개선 계획 수립 후 조치" },
+        { "min": 6, "max": 9, "label": "높음", "action": "즉시 개선. 미조치 시 작업 중지" }
+      ]
+    },
+    "method3Level": {
+      "name": "위험성 수준 3단계 판단법",
+      "note": "2023년 개정 지침이 도입한 간편법. 소규모 현장에 적합",
+      "levels": [
+        { "value": "low",    "label": "낮음", "action": "현 상태 유지" },
+        { "value": "medium", "label": "보통", "action": "개선 계획 수립" },
+        { "value": "high",   "label": "높음", "action": "즉시 개선 또는 작업 중지" }
+      ]
+    }
+  }
+}

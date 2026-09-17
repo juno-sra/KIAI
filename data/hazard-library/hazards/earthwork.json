@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "EXCV",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-EXCV-001",
+      "task": "터파기·굴착",
+      "hazard": "굴착면 기울기 기준 미준수로 토사가 무너져 작업자가 매몰됨",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ENG", "text": "지반 종류별 굴착면 기울기 기준을 확보하거나 흙막이지보공 설치" },
+        { "type": "ADMIN", "text": "사전 지반조사 후 작업계획서 작성 및 준수" },
+        { "type": "ADMIN", "text": "굴착면 상태를 작업 전·중 점검하고 이상 시 즉시 대피" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제338조(지반 등의 굴착 시 위험 방지) 및 별표 11(굴착면의 기울기 기준)", "같은 규칙 제339조(토석붕괴 위험 방지)", "같은 규칙 제38조(사전조사 및 작업계획서의 작성) 및 별표 4"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["굴착면 기울기", "균열·용수 유무", "작업계획서 비치", "점검 기록"],
+      "keywords": ["굴착", "기울기", "붕괴", "매몰"]
+    },
+    {
+      "id": "HZ-EXCV-002",
+      "task": "터파기·굴착",
+      "hazard": "굴착 상단에 자재·장비를 적치해 하중으로 굴착면이 붕괴",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ELIM", "text": "굴착면 어깨부에 자재·장비 적치 금지 구역 설정" },
+        { "type": "ENG", "text": "안전거리 확보 및 방호울 설치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제339조(토석붕괴 위험 방지)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["어깨부 적치물", "이격거리"],
+      "keywords": ["어깨부", "적치", "붕괴"]
+    },
+    {
+      "id": "HZ-EXCV-003",
+      "task": "굴착작업",
+      "hazard": "굴착기 선회 반경 내 작업자 접근으로 협착·충돌",
+      "accidentTypes": ["CAUGHT", "STRIKE"],
+      "controls": [
+        { "type": "ENG", "text": "선회반경 내 출입금지 구획 설정 및 접근경보장치 활용" },
+        { "type": "ADMIN", "text": "신호수 배치 및 신호방법 통일" },
+        { "type": "ADMIN", "text": "운전원과 작업자 간 상호 육안 확인 후 작업" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제20조(출입의 금지 등)", "같은 규칙 제40조(신호)", "같은 규칙 제200조(접촉의 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["신호수 배치", "출입통제 구획", "경보장치 작동"],
+      "keywords": ["굴착기", "선회반경", "신호수", "협착"]
+    },
+    {
+      "id": "HZ-EXCV-004",
+      "task": "굴착작업",
+      "hazard": "지하 매설물(가스관·전력관·통신관) 파손으로 폭발·감전·누출",
+      "accidentTypes": ["EXPLO", "SHOCK", "CHEM"],
+      "controls": [
+        { "type": "ADMIN", "text": "착공 전 매설물 조회 및 시험굴착으로 위치 확인" },
+        { "type": "ENG", "text": "매설물 근접 구간은 인력굴착으로 전환하고 방호조치" },
+        { "type": "ADMIN", "text": "관리기관 입회 및 비상연락체계 유지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제341조(매설물 등 파손에 의한 위험방지)", "같은 규칙 제38조(사전조사 및 작업계획서의 작성)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["매설물 도면 확인", "시험굴착 실시", "관리기관 협의"],
+      "keywords": ["매설물", "가스관", "시험굴착"]
+    },
+    {
+      "id": "HZ-EXCV-005",
+      "task": "굴착부 출입",
+      "hazard": "승강설비 미설치로 굴착면을 타고 오르내리다 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "ENG", "text": "깊이 1.5m 초과 시 승강설비 설치" },
+        { "type": "ADMIN", "text": "지정 승강로 외 이동 금지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제46조(승강설비의 설치)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["승강설비 설치", "설치 간격"],
+      "keywords": ["승강설비", "사다리", "굴착부"]
+    },
+    {
+      "id": "HZ-EXCV-006",
+      "task": "굴착부 주변 통행",
+      "hazard": "굴착부 주변 방호울·표지 미설치로 보행자·차량이 추락",
+      "accidentTypes": ["FALL", "TRAFFIC"],
+      "controls": [
+        { "type": "ENG", "text": "굴착부 둘레에 안전난간·방호울 및 야간 경광등 설치" },
+        { "type": "ADMIN", "text": "출입통제 및 위험 표지 부착" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제42조(추락의 방지)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["방호울 설치", "야간 표시", "출입통제"],
+      "keywords": ["굴착부", "방호울", "추락방지"]
+    },
+    {
+      "id": "HZ-EXCV-007",
+      "task": "굴착부 배수",
+      "hazard": "용수·집중호우로 굴착부가 침수되고 지반이 연약화되어 붕괴",
+      "accidentTypes": ["COLLAPSE", "DROWN"],
+      "controls": [
+        { "type": "ENG", "text": "배수펌프 및 집수정 설치, 상부 우수 유입 차단" },
+        { "type": "ADMIN", "text": "강우 예보 시 작업 중지 기준 운영 및 강우 후 지반 점검" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제339조(토석붕괴 위험 방지)", "같은 규칙 제37조(악천후 및 강풍 시 작업 중지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["배수설비 작동", "우수 유입 차단", "강우 후 점검"],
+      "keywords": ["침수", "배수", "용수"]
+    },
+    {
+      "id": "HZ-EXCV-008",
+      "task": "흙막이 지보공 설치",
+      "hazard": "조립도와 다르게 설치되거나 부재 결손으로 흙막이가 붕괴",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ENG", "text": "조립도에 따라 설치하고 부재 규격·이음 상태 확인" },
+        { "type": "ADMIN", "text": "설치 후 및 주기적 점검 실시, 계측관리 병행" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제345조(흙막이지보공의 재료)", "같은 규칙 제346조(조립도)", "같은 규칙 제347조(붕괴 등의 위험 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["조립도 대조", "부재 변형", "계측 결과", "점검 기록"],
+      "keywords": ["흙막이", "지보공", "조립도", "계측"]
+    },
+    {
+      "id": "HZ-EXCV-009",
+      "task": "흙막이 버팀대 해체",
+      "hazard": "해체 순서 미준수로 응력이 집중되어 흙막이가 붕괴",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ADMIN", "text": "구조검토에 따른 해체 순서 수립 및 작업지휘자 지정" },
+        { "type": "ENG", "text": "해체 전 계측으로 안정성 확인 후 단계적 해체" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제347조(붕괴 등의 위험 방지)", "같은 규칙 제39조(작업지휘자의 지정)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["해체 순서서", "작업지휘자", "계측값"],
+      "keywords": ["버팀대", "해체", "스트럿"]
+    },
+    {
+      "id": "HZ-EXCV-010",
+      "task": "성토·다짐",
+      "hazard": "롤러·다짐장비 후진 중 작업자 충돌 또는 비탈면 전락",
+      "accidentTypes": ["STRIKE", "ROLLOVER"],
+      "controls": [
+        { "type": "ENG", "text": "비탈면 어깨부에 안전거리 표시 및 방호둑 설치" },
+        { "type": "ADMIN", "text": "유도자 배치 및 후진 경보 확인" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제199조(전도 등의 방지)", "같은 규칙 제200조(접촉의 방지)", "같은 규칙 제172조(갓길의 붕괴 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["유도자", "방호둑", "후진경보"],
+      "keywords": ["롤러", "다짐", "전락", "갓길"]
+    },
+    {
+      "id": "HZ-EXCV-011",
+      "task": "토사 운반",
+      "hazard": "덤프트럭 적재함 상승 상태 이동 또는 과적으로 전도",
+      "accidentTypes": ["ROLLOVER", "TRAFFIC"],
+      "controls": [
+        { "type": "ADMIN", "text": "적재함 하강 확인 후 이동, 적재중량 준수" },
+        { "type": "ENG", "text": "운행경로 지반 다짐 및 경사 관리" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제173조(화물적재 시의 조치)", "같은 규칙 제199조(전도 등의 방지)", "같은 규칙 제343조(운행경로 등의 주지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["적재함 하강", "과적 여부", "운행경로 상태"],
+      "keywords": ["덤프", "과적", "전도"]
+    },
+    {
+      "id": "HZ-EXCV-012",
+      "task": "굴착작업",
+      "hazard": "건조한 토사 굴착·운반 중 분진 발생으로 호흡기 노출",
+      "accidentTypes": ["DUST"],
+      "controls": [
+        { "type": "ENG", "text": "살수차 운영 및 방진막 설치" },
+        { "type": "PPE", "text": "방진마스크 지급·착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제607조(국소배기장치의 설치)", "같은 규칙 제617조(호흡용 보호구의 지급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["살수 실시", "방진마스크 착용"],
+      "keywords": ["분진", "비산먼지", "방진마스크"]
+    }
+  ]
+}

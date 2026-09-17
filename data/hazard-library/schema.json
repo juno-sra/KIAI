@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SMP 위험요인 표준 사전",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "workTypeCode",
+    "hazards"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "workTypeCode": {
+      "type": "string",
+      "description": "taxonomy.json의 workTypes 코드"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "hazards": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/hazard"
+      }
+    }
+  },
+  "$defs": {
+    "hazard": {
+      "type": "object",
+      "required": [
+        "id",
+        "task",
+        "hazard",
+        "accidentTypes",
+        "controls",
+        "legalBasis",
+        "legalBasisVerified"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^HZ-[A-Z_]+-[0-9]{3}$",
+          "description": "예: HZ-EXCV-001"
+        },
+        "task": {
+          "type": "string",
+          "description": "세부 작업 단계. TBM의 '작업내용'과 대응"
+        },
+        "hazard": {
+          "type": "string",
+          "description": "유해·위험요인. 무엇이 어떻게 위험한지 구체적으로"
+        },
+        "accidentTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "taxonomy.json의 accidentTypes 코드"
+        },
+        "controls": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "type",
+              "text"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "ELIM",
+                  "SUBST",
+                  "ENG",
+                  "ADMIN",
+                  "PPE"
+                ]
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "감소대책. 제거→대체→공학적→관리적→보호구 순으로 기재"
+        },
+        "legalBasis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "근거 조문. '규칙 제42조(추락의 방지)'처럼 번호와 조문 제목을 함께 적어 대조 가능하게 한다. 확인되지 않으면 '근거 확인 불가'를 넣는다"
+        },
+        "severityDefault": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3,
+          "description": "강도 기본값. 현장 조건에 따라 반드시 재판단"
+        },
+        "likelihoodDefault": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3,
+          "description": "빈도 기본값. 현장 조건에 따라 반드시 재판단"
+        },
+        "checkItems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "순회점검·TBM에서 눈으로 확인할 항목"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "검색용"
+        },
+        "note": {
+          "type": "string"
+        },
+        "legalBasisVerified": {
+          "type": "boolean",
+          "default": false,
+          "description": "조문 번호를 시행 중인 법령 원문과 대조했는지 여부. 기본 false. 사용자가 대조 후 true로 바꾼다. false인 항목은 화면과 출력물에 '조문 미대조' 표시"
+        }
+      }
+    }
+  }
+}

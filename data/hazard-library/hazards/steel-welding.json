@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "STEEL",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-STEEL-001",
+      "task": "철골 조립",
+      "hazard": "철골 보 위 이동 중 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "ENG", "text": "수평구명줄 선행 설치 및 추락방호망 설치" },
+        { "type": "ENG", "text": "승강설비(승강용 트랩) 및 작업발판 설치" },
+        { "type": "PPE", "text": "안전대 이중 후크 사용으로 이동 중 상시 체결" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제42조(추락의 방지)", "같은 규칙 제44조(안전대의 부착설비 등)", "같은 규칙 제380조(철골조립 시의 위험 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["수평구명줄", "방호망", "이중후크 안전대", "승강트랩"],
+      "keywords": ["철골", "보위이동", "추락", "구명줄"]
+    },
+    {
+      "id": "HZ-STEEL-002",
+      "task": "철골 건립",
+      "hazard": "강풍 중 건립작업으로 부재가 흔들려 충돌·낙하",
+      "accidentTypes": ["HIT", "STRIKE"],
+      "controls": [
+        { "type": "ADMIN", "text": "풍속 10m/s 이상 시 작업 중지" },
+        { "type": "ENG", "text": "유도로프 사용 및 하부 출입통제" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제383조(작업의 제한)", "같은 규칙 제37조(악천후 및 강풍 시 작업 중지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["풍속 측정", "작업중지 판단", "유도로프"],
+      "keywords": ["철골건립", "강풍", "작업제한"]
+    },
+    {
+      "id": "HZ-STEEL-003",
+      "task": "철골 조립",
+      "hazard": "볼트 체결 전 부재 고정 불량으로 부재가 탈락",
+      "accidentTypes": ["COLLAPSE", "HIT"],
+      "controls": [
+        { "type": "ENG", "text": "가볼트 체결 수량 확보 후 인양기구 해제" },
+        { "type": "ADMIN", "text": "건립순서 계획 준수 및 작업지휘자 배치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제380조(철골조립 시의 위험 방지)", "같은 규칙 제39조(작업지휘자의 지정)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["가볼트 수량", "건립순서", "작업지휘자"],
+      "keywords": ["가볼트", "철골", "탈락"]
+    },
+    {
+      "id": "HZ-STEEL-004",
+      "task": "용접·용단",
+      "hazard": "용접 불티가 하부 가연물에 낙하해 화재",
+      "accidentTypes": ["FIRE"],
+      "controls": [
+        { "type": "ELIM", "text": "작업 반경 내 가연물 제거" },
+        { "type": "ENG", "text": "불티 비산방지포·방화포 설치 및 소화기 비치" },
+        { "type": "ADMIN", "text": "화기작업 허가 및 화재감시자 배치, 작업 후 잔불 확인" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제241조(화재위험작업 시의 조치)", "같은 규칙 제241조의2(화재감시자)", "같은 규칙 제232조(폭발 또는 화재 등의 예방)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["가연물 제거", "비산방지포", "소화기", "화재감시자", "잔불 확인"],
+      "keywords": ["용접", "불티", "화재감시자"]
+    },
+    {
+      "id": "HZ-STEEL-005",
+      "task": "아크용접",
+      "hazard": "교류아크용접기 홀더 절연 파손·자동전격방지기 미작동으로 감전",
+      "accidentTypes": ["SHOCK"],
+      "controls": [
+        { "type": "ENG", "text": "자동전격방지기 설치·작동 확인" },
+        { "type": "ADMIN", "text": "홀더 절연 상태 및 케이블 피복 점검" },
+        { "type": "PPE", "text": "절연장갑·절연화 착용, 땀에 젖은 상태 작업 금지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제306조(교류아크용접기 등)", "같은 규칙 제302조(전기 기계·기구의 접지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["자동전격방지기", "홀더 절연", "케이블 피복"],
+      "keywords": ["아크용접", "전격방지기", "홀더"]
+    },
+    {
+      "id": "HZ-STEEL-006",
+      "task": "용접·용단",
+      "hazard": "밀폐·통풍 불량 장소 용접으로 용접흄·유해가스 흡입",
+      "accidentTypes": ["DUST", "ASPHY"],
+      "controls": [
+        { "type": "ENG", "text": "국소배기장치 설치 또는 강제 환기" },
+        { "type": "PPE", "text": "송기마스크 또는 방진마스크 착용" },
+        { "type": "ADMIN", "text": "산소·유해가스 농도 측정 후 작업" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제607조(국소배기장치의 설치)", "같은 규칙 제619조(밀폐공간 작업 프로그램의 수립·시행)", "같은 규칙 제617조(호흡용 보호구의 지급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["환기 상태", "가스 농도 측정", "호흡보호구"],
+      "keywords": ["용접흄", "환기", "질식"]
+    },
+    {
+      "id": "HZ-STEEL-007",
+      "task": "가스용접·절단",
+      "hazard": "가스용기 전도·역화로 폭발",
+      "accidentTypes": ["EXPLO", "FIRE"],
+      "controls": [
+        { "type": "ENG", "text": "용기 전도방지 체인 고정 및 역화방지기 설치" },
+        { "type": "ADMIN", "text": "산소·연료가스 용기 분리 보관 및 직사광선 차단" },
+        { "type": "ADMIN", "text": "호스 누설 점검(비눗물 시험)" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제234조(가스등의 용기)", "같은 규칙 제289조(위험물 등의 취급 등)", "같은 규칙 제285조(압력의 제한)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["용기 고정", "역화방지기", "호스 누설", "용기 보관"],
+      "keywords": ["가스용기", "역화방지기", "폭발"]
+    },
+    {
+      "id": "HZ-STEEL-008",
+      "task": "용접작업",
+      "hazard": "아크광선 노출로 전광성 안염, 피부 화상",
+      "accidentTypes": ["TEMP_EXP"],
+      "controls": [
+        { "type": "ENG", "text": "차광막 설치로 주변 작업자 노출 차단" },
+        { "type": "PPE", "text": "차광보안면·용접용 장갑·앞치마 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "같은 규칙 제311조(전기 기계·기구의 설치 시 고려사항) 관련 — 근거 확인 불가(차광막 설치를 직접 규정한 조문 미확인)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["차광막", "차광보안면 등급"],
+      "keywords": ["아크광선", "전광성안염", "차광"]
+    },
+    {
+      "id": "HZ-STEEL-009",
+      "task": "데크플레이트 설치",
+      "hazard": "미고정 데크플레이트를 밟아 뒤집히면서 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "ENG", "text": "설치 즉시 용접·고정하고 미고정 구간 표시" },
+        { "type": "ENG", "text": "하부 추락방호망 설치" },
+        { "type": "ADMIN", "text": "미고정 구간 출입금지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제42조(추락의 방지)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["고정 상태", "미고정 구간 표시", "방호망"],
+      "keywords": ["데크플레이트", "추락", "미고정"]
+    },
+    {
+      "id": "HZ-STEEL-010",
+      "task": "그라인더 작업",
+      "hazard": "숫돌 파손 파편 비산 또는 반발로 베임",
+      "accidentTypes": ["CUT", "HIT"],
+      "controls": [
+        { "type": "ENG", "text": "방호덮개 설치 및 규격에 맞는 숫돌 사용" },
+        { "type": "ADMIN", "text": "사용 전 숫돌 균열 점검 및 시운전 실시" },
+        { "type": "PPE", "text": "보안경·안면보호구 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제122조(연삭기 덮개)", "같은 규칙 제123조(연삭숫돌의 상한회전속도)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["방호덮개", "숫돌 균열", "회전속도 적합", "보안경"],
+      "keywords": ["그라인더", "연삭", "파편"]
+    }
+  ]
+}
