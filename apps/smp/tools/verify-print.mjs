@@ -94,7 +94,7 @@ try {
   const page = await browser.newPage();
 
   // ── 사진대지 ────────────────────────────────────────────
-  console.log('사진대지 — 한 면 3장');
+  console.log(`사진대지 — 한 면 ${PHOTOS_PER_PAGE}장`);
 
   const photos = Array.from({ length: 4 }, (_, i) => ({
     sha256: `hash${i}`,
@@ -138,11 +138,23 @@ try {
     `${ok ? '  OK ' : '  실패'} ${'본문 높이'.padEnd(34)} ${dom.body.toFixed(2)}mm  (한계 ${limit}mm, 여유 ${(limit - dom.body).toFixed(2)}mm)`,
   );
 
+  // 가로·세로 사진의 높이가 같은지 — 칸을 꽉 채우므로 모두 같아야 한다
+  const imgHeights = await page.evaluate(() =>
+    [...document.querySelectorAll('.photo img')].map((el) =>
+      +((el.getBoundingClientRect().height / 96) * 25.4).toFixed(2),
+    ),
+  );
+  const uniform = new Set(imgHeights).size === 1;
+  results.push({ label: '사진 높이가 모두 같음', ok: uniform });
+  console.log(
+    `${uniform ? '  OK ' : '  실패'} ${'사진 높이 통일'.padEnd(34)} ${[...new Set(imgHeights)].join(', ')}mm`,
+  );
+
   const pdfFile = join(dir, 'sheet.pdf');
   await page.pdf({ path: pdfFile, printBackground: true, preferCSSPageSize: true });
   const pdf = readFileSync(pdfFile).toString('latin1');
   const pageCount = (pdf.match(/\/Type\s*\/Page[^s]/g) ?? []).length;
-  checkEq('사진 4장 → 면 수', pageCount, 2);
+  checkEq('사진 4장 → 면 수', pageCount, Math.ceil(4 / PHOTOS_PER_PAGE));
 
   // ── TBM 일지 ────────────────────────────────────────────
   console.log('\nTBM 및 일일안전교육 일지');

@@ -33,11 +33,11 @@ describe('여백과 사진 크기', () => {
   });
 
   it('제목과 안전 여유를 뺀 나머지를 장수로 균등 분할한다', () => {
-    const m = sheetMetrics(3);
-    // (252 - 제목 16.0 - 여유 1.0) / 3
-    expect(m.blockMm).toBeCloseTo(78.33, 1);
+    const m = sheetMetrics(2);
+    // (252 - 제목 16.0 - 여유 1.0) / 2
+    expect(m.blockMm).toBeCloseTo(117.5, 1);
     expect(m.infoMm).toBeCloseTo(9.0, 1);
-    expect(m.photoMm).toBeCloseTo(69.33, 1);
+    expect(m.photoMm).toBeCloseTo(108.5, 1);
   });
 
   it('제목 높이는 실측값이다', () => {
@@ -47,21 +47,20 @@ describe('여백과 사진 크기', () => {
 
   it('안전 여유를 둔다 — 반올림으로 마지막 표가 잘리는 것을 막는다', () => {
     expect(SAFETY_MARGIN_MM).toBe(1.0);
-    const withMargin = sheetMetrics(3);
+    const withMargin = sheetMetrics(2);
     // 본문이 인쇄 영역보다 작아야 한다
-    const used = TITLE_BLOCK_MM + withMargin.blockMm * 3;
+    const used = TITLE_BLOCK_MM + withMargin.blockMm * 2;
     expect(used).toBeLessThan(withMargin.usableMm);
   });
 
-  it('설명표를 한 줄로 줄여 사진 자리를 확보한다', () => {
-    // 두 줄이면 사진이 53mm까지 작아져 현장 상황을 확인하기 어렵다
-    const m = sheetMetrics(3);
-    expect(m.photoMm).toBeGreaterThan(65);
+  it('설명표를 한 줄로 담아 사진 자리를 넓게 쓴다', () => {
+    const m = sheetMetrics(2);
+    expect(m.photoMm).toBeGreaterThan(105);
   });
 
   it('장수를 바꾸면 사진 크기가 따라간다', () => {
     expect(sheetMetrics(1).photoMm).toBeCloseTo(226.0, 1);
-    expect(sheetMetrics(2).photoMm).toBeCloseTo(108.5, 1);
+    expect(sheetMetrics(3).photoMm).toBeCloseTo(69.33, 1);
   });
 
   it('사진이 너무 작아지는 설정을 거부한다', () => {
@@ -88,7 +87,7 @@ describe('여백과 사진 크기', () => {
     const html = renderPhotoSheet({ ...base, photos: onePhoto });
     expect(html).toContain('margin: 25mm');
     expect(html).toContain('20mm;');
-    expect(html).toContain('69.3mm');
+    expect(html).toContain('108.5mm');
   });
 
   it('인쇄 폭은 실측값을 유지한다', () => {
@@ -130,42 +129,42 @@ describe('서식 항목', () => {
   });
 });
 
-describe('페이지당 3장', () => {
-  const seven = ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map((h) => ({ sha256: h, ext: '.jpg' }));
+describe('페이지당 2장', () => {
+  const five = ['a', 'b', 'c', 'd', 'e'].map((h) => ({ sha256: h, ext: '.jpg' }));
   const sources = Object.fromEntries(
-    seven.map((p) => [p.sha256, `data:image/jpeg;base64,${p.sha256}`]),
+    five.map((p) => [p.sha256, `data:image/jpeg;base64,${p.sha256}`]),
   );
 
-  it('기본값이 3장이다', () => {
-    expect(PHOTOS_PER_PAGE).toBe(3);
+  it('기본값이 2장이다', () => {
+    expect(PHOTOS_PER_PAGE).toBe(2);
   });
 
-  it('세 장씩 묶어 면을 만든다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: seven.slice(0, 6) });
+  it('두 장씩 묶어 면을 만든다', () => {
+    const html = renderPhotoSheet({ ...base, sources, photos: five.slice(0, 4) });
     expect(html.match(/class="sheet"/g)).toHaveLength(2);
-    expect(html.match(/class="block"/g)).toHaveLength(6);
+    expect(html.match(/class="block"/g)).toHaveLength(4);
   });
 
-  it('나누어떨어지지 않으면 마지막 면에 남은 장수만 넣는다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: seven });
+  it('홀수면 마지막 면에 한 장만 넣는다', () => {
+    const html = renderPhotoSheet({ ...base, sources, photos: five });
     expect(html.match(/class="sheet"/g)).toHaveLength(3);
-    expect(html.match(/class="block"/g)).toHaveLength(7);
+    expect(html.match(/class="block"/g)).toHaveLength(5);
   });
 
   it('면 번호를 매긴다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: seven });
+    const html = renderPhotoSheet({ ...base, sources, photos: five });
     expect(html).toContain('(1/3)');
     expect(html).toContain('(3/3)');
   });
 
   it('한 면으로 끝나면 번호를 붙이지 않는다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: seven.slice(0, 3) });
+    const html = renderPhotoSheet({ ...base, sources, photos: five.slice(0, 2) });
     expect(html).not.toContain('(1/1)');
   });
 
   it('사진마다 번호를 표시한다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: seven });
-    expect(html.match(/class="no"/g)).toHaveLength(7);
+    const html = renderPhotoSheet({ ...base, sources, photos: five });
+    expect(html.match(/class="no"/g)).toHaveLength(5);
   });
 
   it('한 장뿐이면 번호를 붙이지 않는다', () => {
@@ -173,13 +172,13 @@ describe('페이지당 3장', () => {
   });
 
   it('페이지당 장수를 바꿀 수 있다', () => {
-    const html = renderPhotoSheet({ ...base, sources, photos: seven.slice(0, 4), photosPerPage: 2 });
-    expect(html.match(/class="sheet"/g)).toHaveLength(2);
+    const html = renderPhotoSheet({ ...base, sources, photos: five.slice(0, 3), photosPerPage: 3 });
+    expect(html.match(/class="sheet"/g)).toHaveLength(1);
   });
 
   it('렌더러도 0장 이하를 거부한다', () => {
     expect(() =>
-      renderPhotoSheet({ ...base, sources, photos: seven, photosPerPage: 0 }),
+      renderPhotoSheet({ ...base, sources, photos: five, photosPerPage: 0 }),
     ).toThrow(/1장 이상/);
   });
 
@@ -237,9 +236,15 @@ describe('사진이 빠진 경우', () => {
 });
 
 describe('사진 표시 방식', () => {
-  it('비율을 유지한 채 칸에 맞춘다', () => {
-    // 늘려 붙이면 현장 상황이 왜곡된다
-    expect(renderPhotoSheet({ ...base, photos: onePhoto })).toContain('object-fit: contain');
+  it('가로·세로 어느 쪽이든 사진 높이가 같도록 칸을 꽉 채운다', () => {
+    const html = renderPhotoSheet({ ...base, photos: onePhoto });
+    expect(html).toContain('object-fit: cover');
+    expect(html).toContain('height: 100%');
+  });
+
+  it('비율은 유지한다 — 늘려 붙이면 현장 상황이 왜곡된다', () => {
+    // cover는 비율을 지키고 넘치는 부분만 잘라낸다. fill이면 찌그러진다.
+    expect(renderPhotoSheet({ ...base, photos: onePhoto })).not.toContain('object-fit: fill');
   });
 
   it('사진 상하에 여백을 둔다 — 테두리에 딱 붙지 않게', () => {

@@ -8,8 +8,7 @@
  * 높이는 고정 상수가 아니라 이 분할에서 계산된다. 여백이나 장수를 바꾸면
  * 사진 크기가 자동으로 따라간다.
  *
- * 한 면에 3장을 넣기 위해 설명표를 한 줄로 줄였다. 두 줄이면 사진이 53mm까지
- * 작아져 현장 상황을 확인하기 어렵다.
+ * 설명표는 공사명·내용·날짜를 한 줄에 담아 사진 자리를 넓게 쓴다.
  *
  * 실측 참고값
  *   인쇄 폭 502.5pt (약 177.3mm)
@@ -30,7 +29,7 @@ export const PHOTO_LABEL_WIDTH_PT = 66;
  */
 export const INFO_HEIGHT_MM = 9.0;
 /** 페이지당 사진 수 */
-export const PHOTOS_PER_PAGE = 3;
+export const PHOTOS_PER_PAGE = 2;
 /** 설명표 행 수 — 한 면에 3장을 넣기 위해 공사명·내용·날짜를 한 줄에 담는다 */
 export const INFO_ROWS = 1;
 /** 사진 상하 여백 (px) — 테두리에 딱 붙지 않게 한다 */
@@ -314,11 +313,16 @@ h1 {
   border: 0.4pt solid #999;
 }
 
-/* 비율을 유지한 채 칸 안에 맞춘다. 늘려 붙이면 현장 상황이 왜곡된다 */
+/*
+ * 사진을 칸에 꽉 채운다. 가로·세로 어느 쪽이든 높이가 같아야 인쇄물이
+ * 가지런하다. 비율은 유지하되 칸 밖으로 넘치는 부분은 잘라낸다 —
+ * 늘려 붙이면 현장 상황이 왜곡되기 때문이다.
+ */
 .photo img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .photo .missing {
