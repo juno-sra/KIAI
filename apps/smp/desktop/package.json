@@ -1,0 +1,15 @@
+{
+  "name": "@smp/desktop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "SMP 데스크톱 앱",
+  "main": "./dist/main/index.js",
+  "dependencies": {
+    "@smp/core": "0.1.0",
+    "@smp/crypto": "0.1.0",
+    "@smp/sync": "0.1.0",
+    "@smp/module-sdk": "0.1.0",
+    "@smp/module-daily": "0.1.0"
+  }
+}

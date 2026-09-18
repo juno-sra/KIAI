@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "COMMON",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-COMMON-001",
+      "task": "현장 출입·이동",
+      "hazard": "정리정돈 불량으로 통로에 자재·공구가 놓여 있어 걸려 넘어짐",
+      "accidentTypes": ["SLIP"],
+      "controls": [
+        { "type": "ENG", "text": "작업통로를 구획하고 자재 적치구역을 별도로 지정" },
+        { "type": "ADMIN", "text": "작업 종료 시 정리정돈 확인 후 퇴근" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제22조(통로의 설치)", "같은 규칙 제29조(폐기물 등의 처리)"],
+      "legalBasisVerified": false,
+      "severityDefault": 1,
+      "likelihoodDefault": 3,
+      "checkItems": ["통로 폭 확보 여부", "자재 적치구역 지정 여부"],
+      "keywords": ["정리정돈", "통로", "걸림"]
+    },
+    {
+      "id": "HZ-COMMON-002",
+      "task": "현장 출입·이동",
+      "hazard": "야간·지하 등 조도 부족으로 장애물을 보지 못해 넘어지거나 부딪힘",
+      "accidentTypes": ["SLIP", "STRIKE"],
+      "controls": [
+        { "type": "ENG", "text": "통로 조도를 작업 구분에 맞게 확보하고 비상조명 설치" },
+        { "type": "ADMIN", "text": "조도 부족 구간 사전 점검 및 작업 제한" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제8조(조도)", "같은 규칙 제21조(통로의 조명)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["통로 조명 점등 상태", "비상조명 작동 여부"],
+      "keywords": ["조도", "조명", "야간"]
+    },
+    {
+      "id": "HZ-COMMON-003",
+      "task": "전 작업",
+      "hazard": "안전모·안전대 등 보호구 미착용 또는 불량품 착용",
+      "accidentTypes": ["FALL", "HIT", "STRIKE"],
+      "controls": [
+        { "type": "ADMIN", "text": "작업별 보호구 지정 및 TBM 시 착용 상태 확인" },
+        { "type": "PPE", "text": "안전인증 받은 보호구를 개인별로 지급하고 손상품 즉시 교체" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "같은 규칙 제33조(보호구의 관리)", "산업안전보건법 제83조(안전인증)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["안전모 턱끈 체결", "안전대 고리 체결 위치", "보호구 손상 여부"],
+      "keywords": ["보호구", "안전모", "안전대", "PPE"]
+    },
+    {
+      "id": "HZ-COMMON-004",
+      "task": "혼재작업",
+      "hazard": "상·하부 동시 작업 중 상부에서 낙하한 공구·자재에 하부 작업자가 맞음",
+      "accidentTypes": ["HIT"],
+      "controls": [
+        { "type": "ELIM", "text": "상·하 동시작업을 공정 조정으로 분리" },
+        { "type": "ENG", "text": "낙하물 방지망·방호선반 설치, 하부 출입금지구역 설정" },
+        { "type": "ADMIN", "text": "공구 낙하방지끈 사용 및 작업 전 상호 통보" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제14조(낙하물에 의한 위험의 방지)", "같은 규칙 제20조(출입의 금지 등)", "산업안전보건법 제64조(도급에 따른 산업재해 예방조치)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["낙하물 방지망 설치 상태", "하부 출입통제 여부", "동시작업 여부"],
+      "keywords": ["낙하물", "동시작업", "혼재작업"]
+    },
+    {
+      "id": "HZ-COMMON-005",
+      "task": "하절기 작업",
+      "hazard": "폭염 중 옥외작업으로 인한 열사병·열탈진",
+      "accidentTypes": ["TEMP_EXP"],
+      "controls": [
+        { "type": "ENG", "text": "그늘막·휴게공간 설치, 시원한 물 상시 비치" },
+        { "type": "ADMIN", "text": "체감온도 기준에 따라 시간당 휴식 부여 및 무더위 시간대 작업 조정" },
+        { "type": "ADMIN", "text": "건강 이상 징후자 작업 배제 및 응급조치 체계 마련" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제566조(휴식 등)", "같은 규칙 제571조(폭염에 노출되는 장소에서 작업하는 근로자에 대한 조치)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["그늘·물·휴식 3대 수칙 이행", "체감온도 확인 여부"],
+      "keywords": ["폭염", "온열질환", "열사병"]
+    },
+    {
+      "id": "HZ-COMMON-006",
+      "task": "동절기 작업",
+      "hazard": "결빙된 통로·작업발판에서 미끄러져 넘어지거나 떨어짐",
+      "accidentTypes": ["SLIP", "FALL"],
+      "controls": [
+        { "type": "ENG", "text": "제설·제빙 실시 및 미끄럼방지 조치" },
+        { "type": "ADMIN", "text": "강설·결빙 시 고소작업 중지 기준 운영" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제37조(악천후 및 강풍 시 작업 중지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["결빙 구간 제거 여부", "작업 중지 기준 게시"],
+      "keywords": ["결빙", "동절기", "미끄럼"]
+    },
+    {
+      "id": "HZ-COMMON-007",
+      "task": "강풍·강우 시 작업",
+      "hazard": "악천후 중 작업 강행으로 자재 비산·전도·추락",
+      "accidentTypes": ["FALL", "HIT", "COLLAPSE"],
+      "controls": [
+        { "type": "ADMIN", "text": "풍속·강우량 기준을 정해 초과 시 작업 중지" },
+        { "type": "ENG", "text": "가설자재·경량자재 결속 및 비산 방지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제37조(악천후 및 강풍 시 작업 중지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["풍속 측정 여부", "자재 결속 상태"],
+      "keywords": ["강풍", "악천후", "작업중지"]
+    },
+    {
+      "id": "HZ-COMMON-008",
+      "task": "현장 내 차량 이동",
+      "hazard": "장비·차량 후진 중 작업자와 충돌",
+      "accidentTypes": ["STRIKE", "TRAFFIC"],
+      "controls": [
+        { "type": "ENG", "text": "차량 동선과 보행 동선 분리, 후방감지기·카메라 설치" },
+        { "type": "ADMIN", "text": "유도자 배치 및 제한속도 지정" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제98조(제한속도의 지정 등)", "같은 규칙 제172조(운전위치 이탈 시의 조치)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["유도자 배치", "후방감지장치 작동", "제한속도 표지"],
+      "keywords": ["후진", "유도자", "차량동선"]
+    },
+    {
+      "id": "HZ-COMMON-009",
+      "task": "중량물 취급",
+      "hazard": "무리한 인력 운반으로 허리 등 근골격계 부담",
+      "accidentTypes": ["ERGO"],
+      "controls": [
+        { "type": "ENG", "text": "운반기계·보조기구 사용으로 인력운반 대체" },
+        { "type": "ADMIN", "text": "2인 1조 운반 기준 및 중량 제한 설정" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제663조(중량물 취급)", "같은 규칙 제665조(중량의 표시 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["운반보조기구 비치", "중량 표시"],
+      "keywords": ["중량물", "근골격계", "인력운반"]
+    },
+    {
+      "id": "HZ-COMMON-010",
+      "task": "전 작업",
+      "hazard": "신규 투입 근로자가 현장 위험요인을 모른 채 작업에 투입됨",
+      "accidentTypes": ["OTHER"],
+      "controls": [
+        { "type": "ADMIN", "text": "투입 전 채용 시 교육 및 현장 안전수칙 주지 후 배치" },
+        { "type": "ADMIN", "text": "TBM에서 당일 위험요인 공유 및 참석 확인" }
+      ],
+      "legalBasis": ["산업안전보건법 제29조(근로자에 대한 안전보건교육)", "같은 법 시행규칙 제26조 및 별표 4"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["신규자 교육 이수 여부", "TBM 참석 여부"],
+      "keywords": ["신규자", "채용시교육", "미숙련"]
+    },
+    {
+      "id": "HZ-COMMON-011",
+      "task": "화기 취급 구역",
+      "hazard": "가연물 인근 화기작업으로 화재 발생",
+      "accidentTypes": ["FIRE"],
+      "controls": [
+        { "type": "ELIM", "text": "가연물을 화기작업 장소에서 제거" },
+        { "type": "ENG", "text": "불티 비산방지포 설치 및 소화기 비치" },
+        { "type": "ADMIN", "text": "화기작업 허가 및 화재감시자 배치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제241조(화재위험작업 시의 조치)", "같은 규칙 제241조의2(화재감시자)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["화기작업 허가서", "소화기 비치", "화재감시자 배치"],
+      "keywords": ["화기", "화재감시자", "용접"]
+    },
+    {
+      "id": "HZ-COMMON-012",
+      "task": "가설전기 사용",
+      "hazard": "가설분전반 누전·피복 손상 전선 접촉으로 감전",
+      "accidentTypes": ["SHOCK"],
+      "controls": [
+        { "type": "ENG", "text": "분전반에 누전차단기 설치 및 접지" },
+        { "type": "ENG", "text": "전선은 지상 이격 또는 보호관 내 배선" },
+        { "type": "ADMIN", "text": "작업 전 누전차단기 동작시험" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제304조(누전차단기에 의한 감전방지)", "같은 규칙 제302조(전기 기계·기구의 접지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["누전차단기 시험 기록", "접지 상태", "전선 피복 손상"],
+      "keywords": ["감전", "누전차단기", "가설전기"]
+    }
+  ]
+}

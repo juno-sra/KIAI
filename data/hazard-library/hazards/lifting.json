@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "LIFT",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-LIFT-001",
+      "task": "이동식크레인 작업",
+      "hazard": "아웃트리거 미전개·지반 지지력 부족으로 크레인 전도",
+      "accidentTypes": ["ROLLOVER"],
+      "controls": [
+        { "type": "ENG", "text": "아웃트리거 완전 전개 및 받침판 설치, 지반 지지력 사전 확인" },
+        { "type": "ADMIN", "text": "작업계획서 작성 및 설치 위치 사전 검토" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제38조(사전조사 및 작업계획서의 작성) 및 별표 4", "같은 규칙 제199조(전도 등의 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["아웃트리거 전개", "받침판", "지반 상태", "작업계획서"],
+      "keywords": ["이동식크레인", "전도", "아웃트리거"]
+    },
+    {
+      "id": "HZ-LIFT-002",
+      "task": "크레인 인양작업",
+      "hazard": "정격하중 초과 인양으로 붐 손상·전도",
+      "accidentTypes": ["ROLLOVER", "COLLAPSE"],
+      "controls": [
+        { "type": "ENG", "text": "과부하방지장치 작동 확인 및 정격하중표 비치" },
+        { "type": "ADMIN", "text": "인양물 중량·작업반경 사전 산정 후 작업" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제133조(정격하중 등의 표시)", "같은 규칙 제134조(방호장치의 조정)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["과부하방지장치", "정격하중표", "중량 산정"],
+      "keywords": ["과부하", "정격하중", "인양"]
+    },
+    {
+      "id": "HZ-LIFT-003",
+      "task": "크레인 인양작업",
+      "hazard": "인양물 하부 또는 붐 하부에 작업자가 있어 낙하물에 맞음",
+      "accidentTypes": ["HIT"],
+      "controls": [
+        { "type": "ENG", "text": "인양 경로 하부 출입금지 구역 설정 및 바리케이드 설치" },
+        { "type": "ADMIN", "text": "신호수 배치 및 무전 신호 통일" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제20조(출입의 금지 등)", "같은 규칙 제40조(신호)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["하부 통제", "신호수 배치", "신호 통일"],
+      "keywords": ["인양", "낙하", "신호수"]
+    },
+    {
+      "id": "HZ-LIFT-004",
+      "task": "줄걸이 작업",
+      "hazard": "손상된 와이어로프·섬유벨트 사용으로 절단되어 인양물 낙하",
+      "accidentTypes": ["HIT"],
+      "controls": [
+        { "type": "ENG", "text": "안전계수 이상 달기구 사용 및 모서리 보호대 설치" },
+        { "type": "ADMIN", "text": "작업 전 소선 단선·변형·마모 점검, 불량품 즉시 폐기" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제163조(와이어로프 등 달기구의 안전계수)", "같은 규칙 제166조(이음매가 있는 와이어로프 등의 사용금지)", "같은 규칙 제168조(변형되어 있는 훅·샤클 등의 사용금지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["로프 소선 단선", "훅 해지장치", "모서리 보호대", "안전계수"],
+      "keywords": ["줄걸이", "와이어로프", "샤클", "해지장치"]
+    },
+    {
+      "id": "HZ-LIFT-005",
+      "task": "크레인 인양작업",
+      "hazard": "인양물 흔들림 제어를 위해 손으로 붙잡다가 끼이거나 함께 끌려감",
+      "accidentTypes": ["CAUGHT", "STRIKE"],
+      "controls": [
+        { "type": "ENG", "text": "유도로프(태그라인) 사용" },
+        { "type": "ADMIN", "text": "직접 접촉 금지 및 안전거리 유지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제20조(출입의 금지 등)", "근거 확인 불가(유도로프 사용을 직접 규정한 조문 미확인)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["유도로프 사용", "안전거리"],
+      "keywords": ["태그라인", "유도로프", "흔들림"]
+    },
+    {
+      "id": "HZ-LIFT-006",
+      "task": "크레인 작업",
+      "hazard": "충전전로 인근 작업 중 붐이 접촉해 감전",
+      "accidentTypes": ["SHOCK"],
+      "controls": [
+        { "type": "ELIM", "text": "전력회사 협의로 정전 또는 전선 이설" },
+        { "type": "ENG", "text": "절연용 방호구 설치 및 이격거리 확보" },
+        { "type": "ADMIN", "text": "감시인 배치 및 접근한계거리 표시" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제321조(충전전로 인근에서의 차량·기계장치 작업)", "같은 규칙 제322조(유도전류 등에 의한 위험 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["이격거리", "방호구 설치", "감시인 배치"],
+      "keywords": ["충전전로", "감전", "붐접촉"]
+    },
+    {
+      "id": "HZ-LIFT-007",
+      "task": "타워크레인 설치·해체·상승",
+      "hazard": "설치·해체 작업 중 부재 낙하 또는 마스트 붕괴",
+      "accidentTypes": ["FALL", "COLLAPSE", "HIT"],
+      "controls": [
+        { "type": "ADMIN", "text": "작업계획서 작성 및 자격을 갖춘 설치·해체업체 시행" },
+        { "type": "ADMIN", "text": "작업구역 출입통제 및 작업지휘자 상주" },
+        { "type": "ADMIN", "text": "순간풍속 10m/s 초과 시 설치·해체 작업 중지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제141조(조립 등의 작업)", "같은 규칙 제142조(타워크레인의 지지)", "같은 규칙 제37조(악천후 및 강풍 시 작업 중지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["작업계획서", "풍속 측정", "출입통제", "지지 상태"],
+      "keywords": ["타워크레인", "텔레스코핑", "해체"]
+    },
+    {
+      "id": "HZ-LIFT-008",
+      "task": "타워크레인 운전",
+      "hazard": "강풍 중 운전 또는 폭풍 시 미고정으로 이탈·전도",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ADMIN", "text": "순간풍속 15m/s 초과 시 운전 중지, 30m/s 초과 예상 시 이탈방지 조치" },
+        { "type": "ENG", "text": "작업 종료 시 선회 프리 상태 유지 및 훅 고정" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제37조(악천후 및 강풍 시 작업 중지)", "같은 규칙 제140조(폭풍에 의한 이탈 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["풍속계 작동", "작업중지 기준", "이탈방지 조치"],
+      "keywords": ["타워크레인", "강풍", "풍속"]
+    },
+    {
+      "id": "HZ-LIFT-009",
+      "task": "건설용 리프트 사용",
+      "hazard": "적재하중 초과·문 개방 상태 운행으로 추락·낙하",
+      "accidentTypes": ["FALL", "HIT"],
+      "controls": [
+        { "type": "ENG", "text": "과부하방지장치·문 인터록 작동 확인" },
+        { "type": "ADMIN", "text": "적재하중 표시 및 운전자 지정, 정원·정량 준수" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제151조(권과 방지 등)", "같은 규칙 제152조(무너짐의 방지)", "같은 규칙 제154조(붕괴 등의 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["과부하방지장치", "문 인터록", "적재하중 표시"],
+      "keywords": ["리프트", "호이스트", "인터록"]
+    },
+    {
+      "id": "HZ-LIFT-010",
+      "task": "양중기 정기점검",
+      "hazard": "안전검사 미실시 장비 사용으로 방호장치 결함 미발견",
+      "accidentTypes": ["OTHER"],
+      "controls": [
+        { "type": "ADMIN", "text": "안전검사 합격증명서 확인 후 반입·사용" },
+        { "type": "ADMIN", "text": "작업시작 전 점검 실시 및 기록 보존" }
+      ],
+      "legalBasis": ["산업안전보건법 제93조(안전검사)", "산업안전보건기준에 관한 규칙 제35조제2항 및 별표 3(작업시작 전 점검사항)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["안전검사 합격증", "점검 기록", "유효기간"],
+      "keywords": ["안전검사", "양중기", "점검"]
+    },
+    {
+      "id": "HZ-LIFT-011",
+      "task": "인양작업",
+      "hazard": "무자격자가 크레인을 운전하거나 신호를 함",
+      "accidentTypes": ["OTHER"],
+      "controls": [
+        { "type": "ADMIN", "text": "면허·자격 확인 후 운전자 지정" },
+        { "type": "ADMIN", "text": "신호수 지정 및 신호방법 사전 교육" }
+      ],
+      "legalBasis": ["산업안전보건법 제140조(자격 등에 의한 취업 제한)", "산업안전보건기준에 관한 규칙 제40조(신호)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["운전 자격증", "신호수 지정", "신호방법 교육"],
+      "keywords": ["자격", "면허", "신호수"]
+    }
+  ]
+}

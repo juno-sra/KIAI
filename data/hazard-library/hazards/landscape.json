@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "LAND",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-LAND-001",
+      "task": "수목 식재",
+      "hazard": "수목 인양·거치 중 전도되어 작업자를 덮침",
+      "accidentTypes": ["ROLLOVER", "HIT"],
+      "controls": [
+        { "type": "ENG", "text": "지지대(삼각대) 즉시 설치 및 유도로프 사용" },
+        { "type": "ADMIN", "text": "인양 하부 접근 금지 및 신호수 배치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제20조(출입의 금지 등)", "같은 규칙 제40조(신호)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["지지대", "유도로프", "하부 통제"],
+      "keywords": ["수목", "식재", "전도"]
+    },
+    {
+      "id": "HZ-LAND-002",
+      "task": "전정·벌목",
+      "hazard": "엔진톱 반발(킥백)로 절단 상해",
+      "accidentTypes": ["CUT"],
+      "controls": [
+        { "type": "ENG", "text": "체인브레이크·손보호대 정상 작동 확인" },
+        { "type": "ADMIN", "text": "숙련자 작업 및 어깨높이 이상 절단 금지" },
+        { "type": "PPE", "text": "방진면·방호바지·안전화 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "산업안전보건법 제140조(자격 등에 의한 취업 제한)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["체인브레이크", "보호구", "작업 높이"],
+      "keywords": ["엔진톱", "킥백", "벌목"]
+    },
+    {
+      "id": "HZ-LAND-003",
+      "task": "고소 전정작업",
+      "hazard": "사다리·고소작업차에서 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "SUBST", "text": "고소작업차 사용으로 사다리 대체" },
+        { "type": "ENG", "text": "아웃트리거 전개 및 작업대 난간 확인" },
+        { "type": "PPE", "text": "안전대 체결" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제186조(고소작업대 설치 등의 조치)", "같은 규칙 제42조(추락의 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["작업대 종류", "아웃트리거", "안전대"],
+      "keywords": ["전정", "고소작업차", "추락"]
+    },
+    {
+      "id": "HZ-LAND-004",
+      "task": "예초작업",
+      "hazard": "예초기 날에 의한 절단, 비산물에 의한 눈 손상",
+      "accidentTypes": ["CUT", "HIT"],
+      "controls": [
+        { "type": "ENG", "text": "보호덮개 부착 및 규격 날 사용" },
+        { "type": "ADMIN", "text": "작업 반경 15m 이내 접근 금지" },
+        { "type": "PPE", "text": "안면보호구·정강이 보호대 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["보호덮개", "접근 통제", "안면보호구"],
+      "keywords": ["예초기", "비산", "절단"]
+    },
+    {
+      "id": "HZ-LAND-005",
+      "task": "옥외작업",
+      "hazard": "벌·뱀 등에 의한 교상 및 아나필락시스",
+      "accidentTypes": ["OTHER"],
+      "controls": [
+        { "type": "ADMIN", "text": "작업 전 벌집·서식 여부 확인 및 제거 의뢰" },
+        { "type": "PPE", "text": "긴소매·장화 착용, 향이 강한 화장품 사용 자제" },
+        { "type": "ADMIN", "text": "응급처치 물품 비치 및 병원 이송 체계 확보" }
+      ],
+      "legalBasis": ["근거 확인 불가(동물 교상 예방을 직접 규정한 조문 미확인)", "산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["사전 확인", "보호 복장", "응급처치 물품"],
+      "keywords": ["벌쏘임", "뱀", "아나필락시스"]
+    }
+  ]
+}

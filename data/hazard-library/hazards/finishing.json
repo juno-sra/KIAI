@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "MASON",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-MASON-001",
+      "task": "조적·미장",
+      "hazard": "말비계·이동식비계에서 작업 중 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "ENG", "text": "규격 작업발판 사용 및 난간 설치" },
+        { "type": "ADMIN", "text": "발판 위 자재 과적 금지, 이동 시 하차" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제42조(추락의 방지)", "같은 규칙 제67조(말비계)", "같은 규칙 제68조(이동식비계)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["발판 규격", "난간", "적재 상태"],
+      "keywords": ["조적", "미장", "말비계"]
+    },
+    {
+      "id": "HZ-MASON-002",
+      "task": "조적",
+      "hazard": "쌓아올린 블록·벽돌 더미가 무너져 깔림",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ENG", "text": "적치 높이 제한 및 받침·고임 설치" },
+        { "type": "ADMIN", "text": "미양생 조적벽 지지대 설치 및 접근 통제" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제173조(화물적재 시의 조치)", "같은 규칙 제51조(구축물등의 안전 유지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["적치 높이", "지지대", "접근 통제"],
+      "keywords": ["조적", "붕괴", "적치"]
+    },
+    {
+      "id": "HZ-MASON-003",
+      "task": "도장",
+      "hazard": "밀폐공간 유기용제 도장으로 중독·화재",
+      "accidentTypes": ["CHEM", "FIRE", "ASPHY"],
+      "controls": [
+        { "type": "SUBST", "text": "수성·저휘발성 도료로 대체 검토" },
+        { "type": "ENG", "text": "강제 환기 및 방폭형 조명·환기설비 사용" },
+        { "type": "ADMIN", "text": "MSDS 비치·교육, 화기 반입 금지" },
+        { "type": "PPE", "text": "유기가스용 방독마스크·보호장갑 착용" }
+      ],
+      "legalBasis": ["산업안전보건법 제110조(물질안전보건자료의 작성 및 제출)", "같은 법 제114조(물질안전보건자료의 게시 및 교육)", "산업안전보건기준에 관한 규칙 제422조(관리대상 유해물질과 관계되는 설비)", "같은 규칙 제232조(폭발 또는 화재 등의 예방)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["환기 상태", "MSDS 게시", "방독마스크 정화통 유효기간", "화기 통제"],
+      "keywords": ["도장", "유기용제", "방독마스크", "MSDS"]
+    },
+    {
+      "id": "HZ-MASON-004",
+      "task": "방수",
+      "hazard": "토치 가열 방수 시 불티로 화재",
+      "accidentTypes": ["FIRE"],
+      "controls": [
+        { "type": "SUBST", "text": "비가열 공법(자착식 등) 검토" },
+        { "type": "ENG", "text": "소화기 비치 및 가연물 제거" },
+        { "type": "ADMIN", "text": "화기작업 허가, 화재감시자 배치, 작업 후 잔불 확인" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제241조(화재위험작업 시의 조치)", "같은 규칙 제241조의2(화재감시자)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["소화기", "가연물", "화재감시자", "잔불 확인"],
+      "keywords": ["방수", "토치", "화재"]
+    },
+    {
+      "id": "HZ-MASON-005",
+      "task": "창호·유리 시공",
+      "hazard": "유리 운반·설치 중 파손으로 베임, 낙하",
+      "accidentTypes": ["CUT", "HIT"],
+      "controls": [
+        { "type": "ENG", "text": "유리 전용 흡착기·운반대차 사용" },
+        { "type": "ADMIN", "text": "2인 이상 운반 및 하부 통제" },
+        { "type": "PPE", "text": "절단방지 장갑·보안경 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "같은 규칙 제663조(중량물 취급)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["흡착기 사용", "운반 인원", "보호구"],
+      "keywords": ["유리", "창호", "베임"]
+    },
+    {
+      "id": "HZ-MASON-006",
+      "task": "내장·경량철골",
+      "hazard": "경량철골 절단 시 파편 비산 및 예리부 베임",
+      "accidentTypes": ["CUT"],
+      "controls": [
+        { "type": "ENG", "text": "전용 절단기 사용 및 절단면 보호캡 설치" },
+        { "type": "PPE", "text": "보안경·절단방지 장갑 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "같은 규칙 제122조(연삭기 덮개)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["절단기 방호", "보호구", "절단면 처리"],
+      "keywords": ["경량철골", "절단", "베임"]
+    },
+    {
+      "id": "HZ-MASON-007",
+      "task": "지붕·외장 작업",
+      "hazard": "채광창·슬레이트 등 취약재를 밟아 파손되며 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "ENG", "text": "폭 30cm 이상 발판 설치 및 추락방호망 설치" },
+        { "type": "ADMIN", "text": "취약 구간 표시 및 진입 금지" },
+        { "type": "PPE", "text": "안전대 체결" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제45조(지붕 위에서의 위험 방지)", "같은 규칙 제42조(추락의 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["발판 설치", "방호망", "취약부 표시"],
+      "keywords": ["지붕", "슬레이트", "채광창"]
+    }
+  ]
+}

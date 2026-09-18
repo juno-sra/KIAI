@@ -1,0 +1,36 @@
+name: smp tests
+
+on:
+  push:
+    paths:
+      - 'apps/smp/**'
+      - 'data/hazard-library/**'
+      - '.github/workflows/smp-tests.yml'
+  pull_request:
+    paths:
+      - 'apps/smp/**'
+      - 'data/hazard-library/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 위험요인 표준 사전 검증
+        run: node data/hazard-library/validate.mjs
+
+      - name: 의존성 설치
+        working-directory: apps/smp
+        run: npm ci
+
+      - name: 타입 검사
+        working-directory: apps/smp
+        run: npm run build
+
+      - name: 시험 실행
+        working-directory: apps/smp
+        run: npm test

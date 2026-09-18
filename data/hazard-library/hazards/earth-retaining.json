@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "EARTH",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-EARTH-001",
+      "task": "H-파일 및 토류판 설치",
+      "hazard": "토류판 설치 지연으로 배면 토사가 유실되며 붕괴",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ENG", "text": "굴착 진행에 맞춰 토류판을 즉시 설치하고 배면 공극 채움" },
+        { "type": "ADMIN", "text": "1회 굴착 깊이 제한 및 단계별 확인" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제347조(붕괴 등의 위험 방지)", "같은 규칙 제346조(조립도)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["토류판 설치 속도", "배면 공극", "굴착 깊이"],
+      "keywords": ["토류판", "H파일", "배면유실"]
+    },
+    {
+      "id": "HZ-EARTH-002",
+      "task": "어스앵커 천공·인장",
+      "hazard": "인장 중 앵커 두부가 파단되어 부재가 비산",
+      "accidentTypes": ["HIT"],
+      "controls": [
+        { "type": "ENG", "text": "인장기 후방 방호판 설치" },
+        { "type": "ADMIN", "text": "인장 중 후방 접근 금지 및 단계별 가압" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제20조(출입의 금지 등)", "같은 규칙 제285조(압력의 제한)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["방호판", "후방 통제", "가압 단계"],
+      "keywords": ["어스앵커", "인장", "파단"]
+    },
+    {
+      "id": "HZ-EARTH-003",
+      "task": "흙막이 계측관리",
+      "hazard": "계측 미실시·관리기준 초과 방치로 붕괴 징후를 놓침",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ENG", "text": "지중경사계·하중계·지하수위계 등 계측기 설치" },
+        { "type": "ADMIN", "text": "관리기준치 설정 및 초과 시 작업 중지·보강 절차 운영" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제347조(붕괴 등의 위험 방지)", "건설기술 진흥법 제62조(건설공사의 안전관리) 관련 계측관리 — 조문 미대조"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["계측기 설치", "측정 주기", "관리기준 초과 여부", "조치 기록"],
+      "keywords": ["계측", "지중경사계", "관리기준"]
+    },
+    {
+      "id": "HZ-EARTH-004",
+      "task": "지하수 처리",
+      "hazard": "과도한 배수로 인근 지반이 침하하고 인접 구조물이 손상",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ENG", "text": "차수벽 설치 및 배수량 관리, 필요 시 복수(리차지) 시행" },
+        { "type": "ADMIN", "text": "인접 구조물 균열·침하 계측 및 사전 조사" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제51조(구축물등의 안전 유지)", "같은 규칙 제347조(붕괴 등의 위험 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["배수량", "인접 구조물 계측", "차수 상태"],
+      "keywords": ["지하수", "침하", "차수벽"]
+    },
+    {
+      "id": "HZ-EARTH-005",
+      "task": "흙막이 상부 작업",
+      "hazard": "띠장·버팀대 위를 통로로 사용하다 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "ENG", "text": "전용 작업통로와 안전난간 설치" },
+        { "type": "ADMIN", "text": "구조부재 통행 금지 및 지정 통로 이용" },
+        { "type": "PPE", "text": "안전대 체결" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제42조(추락의 방지)", "같은 규칙 제23조(가설통로의 구조)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["전용 통로", "난간", "통행 실태"],
+      "keywords": ["띠장", "버팀대", "통로"]
+    }
+  ]
+}

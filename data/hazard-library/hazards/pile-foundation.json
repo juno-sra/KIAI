@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "PILE",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-PILE-001",
+      "task": "항타작업",
+      "hazard": "파일 세우기 중 파일이 전도되어 작업자를 덮침",
+      "accidentTypes": ["ROLLOVER", "HIT"],
+      "controls": [
+        { "type": "ENG", "text": "파일 거치대 사용 및 유도로프로 방향 제어" },
+        { "type": "ADMIN", "text": "작업반경 출입통제 및 신호수 배치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제209조(무너짐의 방지)", "같은 규칙 제20조(출입의 금지 등)", "같은 규칙 제40조(신호)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["거치대 사용", "유도로프", "출입통제"],
+      "keywords": ["파일", "항타", "전도"]
+    },
+    {
+      "id": "HZ-PILE-002",
+      "task": "항타작업",
+      "hazard": "항타 소음·진동으로 청력 손상 및 인근 구조물 균열",
+      "accidentTypes": ["NOISE"],
+      "controls": [
+        { "type": "SUBST", "text": "저소음·저진동 공법(매입식 등) 검토" },
+        { "type": "ENG", "text": "방음벽 설치 및 진동 계측 관리" },
+        { "type": "PPE", "text": "청력보호구 지급·착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제512조(정의) 이하 소음작업 관련 규정", "같은 규칙 제516조(청력보호구의 지급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["소음 측정", "청력보호구", "진동 계측"],
+      "keywords": ["소음", "진동", "청력"]
+    },
+    {
+      "id": "HZ-PILE-003",
+      "task": "천공작업",
+      "hazard": "천공 구멍에 빠지거나 케이싱 인발 후 개구부에 추락",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "ENG", "text": "천공 후 즉시 덮개 설치 또는 방호울 설치" },
+        { "type": "ADMIN", "text": "개구부 위치 표시 및 야간 경광등 설치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제43조(개구부 등의 방호 조치)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["덮개 설치", "위치 표시", "야간 표시"],
+      "keywords": ["천공", "개구부", "케이싱"]
+    },
+    {
+      "id": "HZ-PILE-004",
+      "task": "항타기 조립·해체",
+      "hazard": "리더 조립·해체 중 부재 낙하 또는 장비 전도",
+      "accidentTypes": ["HIT", "ROLLOVER"],
+      "controls": [
+        { "type": "ADMIN", "text": "작업계획서 수립 및 작업지휘자 상주" },
+        { "type": "ENG", "text": "지반 보강 및 아웃트리거·받침 설치" },
+        { "type": "ADMIN", "text": "조립·해체 시 점검사항 확인 후 작업" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제207조(조립·해체 시 점검사항)", "같은 규칙 제209조(무너짐의 방지)", "같은 규칙 제39조(작업지휘자의 지정)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["작업계획서", "지반 보강", "점검사항 확인"],
+      "keywords": ["리더", "항타기", "조립"]
+    },
+    {
+      "id": "HZ-PILE-005",
+      "task": "파일 두부 정리",
+      "hazard": "파일 커터·브레이커 작업 중 콘크리트 파편 비산",
+      "accidentTypes": ["HIT", "CUT"],
+      "controls": [
+        { "type": "ENG", "text": "비산 방지막 설치" },
+        { "type": "PPE", "text": "보안경·안면보호구 착용" },
+        { "type": "ADMIN", "text": "주변 작업자 접근 통제" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["비산방지막", "보호구", "접근통제"],
+      "keywords": ["두부정리", "파편", "브레이커"]
+    },
+    {
+      "id": "HZ-PILE-006",
+      "task": "현장타설말뚝 작업",
+      "hazard": "공벽 붕괴 또는 슬라임 처리 중 공내 추락",
+      "accidentTypes": ["COLLAPSE", "FALL"],
+      "controls": [
+        { "type": "ENG", "text": "안정액·케이싱으로 공벽 유지" },
+        { "type": "ENG", "text": "공 상부 방호울 설치 및 덮개 관리" },
+        { "type": "PPE", "text": "공 주변 작업 시 안전대 체결" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제43조(개구부 등의 방호 조치)", "같은 규칙 제339조(토석붕괴 위험 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["안정액 관리", "방호울", "안전대"],
+      "keywords": ["현장타설말뚝", "공벽", "슬라임"]
+    }
+  ]
+}

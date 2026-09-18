@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "CONFIN",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-CONFIN-001",
+      "task": "맨홀·정화조·피트 내부 작업",
+      "hazard": "산소결핍 또는 황화수소 등 유해가스로 질식",
+      "accidentTypes": ["ASPHY"],
+      "controls": [
+        { "type": "ADMIN", "text": "작업 전 산소·유해가스 농도 측정, 적정공기 확인 후 출입" },
+        { "type": "ENG", "text": "작업 중 계속 환기 및 농도 연속 측정" },
+        { "type": "ADMIN", "text": "감시인 외부 상시 배치 및 연락체계 유지" },
+        { "type": "PPE", "text": "송기마스크·공기호흡기, 안전대·구명줄 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제619조(밀폐공간 작업 프로그램의 수립·시행)", "같은 규칙 제620조(환기 등)", "같은 규칙 제621조(인원의 점검)", "같은 규칙 제622조(출입의 금지)", "같은 규칙 제623조(감시인의 배치 등)", "같은 규칙 제624조(안전대 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["가스 측정 기록", "환기 실시", "감시인 배치", "구조장비 비치", "출입 인원 점검"],
+      "keywords": ["밀폐공간", "질식", "산소결핍", "황화수소"]
+    },
+    {
+      "id": "HZ-CONFIN-002",
+      "task": "밀폐공간 구조작업",
+      "hazard": "쓰러진 동료를 구하러 보호구 없이 들어가 2차 재해",
+      "accidentTypes": ["ASPHY"],
+      "controls": [
+        { "type": "ADMIN", "text": "무방비 진입 절대 금지 원칙 교육 및 게시" },
+        { "type": "ENG", "text": "구조용 삼각대·안전대·공기호흡기 상시 비치" },
+        { "type": "ADMIN", "text": "비상연락 및 119 신고 절차 숙지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제626조(구출 시 공기호흡기 또는 송기마스크의 사용)", "같은 규칙 제623조(감시인의 배치 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["구조장비 비치", "교육 실시", "비상연락체계"],
+      "keywords": ["2차재해", "구조", "공기호흡기"]
+    },
+    {
+      "id": "HZ-CONFIN-003",
+      "task": "구조물 해체",
+      "hazard": "해체 순서 미준수로 잔존 구조물이 예상치 못하게 붕괴",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ADMIN", "text": "해체계획서 작성 및 구조검토 반영, 작업지휘자 상주" },
+        { "type": "ENG", "text": "단계별 해체 및 필요 시 지지대 설치" },
+        { "type": "ADMIN", "text": "해체 구역 출입통제" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제38조(사전조사 및 작업계획서의 작성) 및 별표 4", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["해체계획서", "작업지휘자", "출입통제", "지지대"],
+      "keywords": ["해체", "붕괴", "해체계획서"]
+    },
+    {
+      "id": "HZ-CONFIN-004",
+      "task": "구조물 해체",
+      "hazard": "해체 잔재가 비산·낙하해 인접 통행자·건물 피해",
+      "accidentTypes": ["HIT"],
+      "controls": [
+        { "type": "ENG", "text": "방호막·비계 설치 및 낙하물 방지망 설치" },
+        { "type": "ADMIN", "text": "살수로 분진 저감 및 인접 경계 통제" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제14조(낙하물에 의한 위험의 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["방호막", "낙하물 방지망", "경계 통제", "살수"],
+      "keywords": ["해체", "비산", "낙하물"]
+    },
+    {
+      "id": "HZ-CONFIN-005",
+      "task": "석면 해체·제거",
+      "hazard": "석면 함유 자재 해체 중 석면분진 흡입",
+      "accidentTypes": ["DUST", "CHEM"],
+      "controls": [
+        { "type": "ADMIN", "text": "석면조사 실시 후 등록업체를 통해 해체·제거" },
+        { "type": "ENG", "text": "음압밀폐 및 습식 작업, 경고표지 설치" },
+        { "type": "PPE", "text": "전면형 방진마스크·보호복 착용, 탈의·세척 시설 운영" }
+      ],
+      "legalBasis": ["산업안전보건법 제119조(석면조사)", "같은 법 제122조(석면의 해체·제거)", "산업안전보건기준에 관한 규칙 제489조 이하(석면의 제조·사용 시 준수사항)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["석면조사 결과", "등록업체 여부", "음압 유지", "보호복 착용"],
+      "keywords": ["석면", "분진", "음압"]
+    },
+    {
+      "id": "HZ-CONFIN-006",
+      "task": "압쇄기 해체작업",
+      "hazard": "장비 작업반경 내 근로자 접근으로 협착",
+      "accidentTypes": ["CAUGHT", "STRIKE"],
+      "controls": [
+        { "type": "ENG", "text": "작업반경 출입금지 구획 및 유도자 배치" },
+        { "type": "ADMIN", "text": "장비와 근로자 동시작업 금지" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제200조(접촉의 방지)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["작업반경 통제", "유도자", "동시작업 여부"],
+      "keywords": ["압쇄기", "해체", "협착"]
+    }
+  ]
+}

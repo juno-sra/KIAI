@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "ROAD",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-ROAD-001",
+      "task": "차도 인접 작업",
+      "hazard": "통행 차량이 작업구간으로 돌진해 작업자와 충돌",
+      "accidentTypes": ["TRAFFIC", "STRIKE"],
+      "controls": [
+        { "type": "ENG", "text": "안전표지·라바콘·방호벽으로 작업구간 격리, 완화구간 확보" },
+        { "type": "ADMIN", "text": "신호수 배치 및 야간 발광조끼·경광등 사용" },
+        { "type": "ADMIN", "text": "교통관리계획 수립 및 관계기관 협의" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제20조(출입의 금지 등)", "같은 규칙 제40조(신호)", "도로교통법 제69조(도로공사의 신고 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["작업구간 표지", "완화구간", "신호수", "발광조끼"],
+      "keywords": ["차도", "교통", "신호수", "라바콘"]
+    },
+    {
+      "id": "HZ-ROAD-002",
+      "task": "아스팔트 포장",
+      "hazard": "고온 아스팔트 혼합물 접촉으로 화상",
+      "accidentTypes": ["TEMP_EXP"],
+      "controls": [
+        { "type": "ENG", "text": "덤프 하역 시 작업자 이격 및 가열부 방호" },
+        { "type": "PPE", "text": "내열장갑·안전화·긴소매 작업복 착용" },
+        { "type": "ADMIN", "text": "화상 응급처치 물품 비치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "같은 규칙 제247조(고열물 취급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["보호구", "이격거리", "응급처치 물품"],
+      "keywords": ["아스팔트", "화상", "고온"]
+    },
+    {
+      "id": "HZ-ROAD-003",
+      "task": "아스팔트 포장",
+      "hazard": "아스팔트 흄·유기증기 흡입",
+      "accidentTypes": ["DUST", "CHEM"],
+      "controls": [
+        { "type": "ENG", "text": "풍상측 작업 배치 및 환기 확보" },
+        { "type": "PPE", "text": "방진·방독 겸용 마스크 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제617조(호흡용 보호구의 지급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["마스크 착용", "작업 위치"],
+      "keywords": ["아스팔트흄", "유기증기"]
+    },
+    {
+      "id": "HZ-ROAD-004",
+      "task": "포장 절단",
+      "hazard": "커터기 날 파손·반발로 절단 상해, 분진 발생",
+      "accidentTypes": ["CUT", "DUST"],
+      "controls": [
+        { "type": "ENG", "text": "방호덮개 및 습식 절단으로 분진 저감" },
+        { "type": "ADMIN", "text": "날 상태 점검 및 규격 준수" },
+        { "type": "PPE", "text": "보안경·방진마스크·귀마개 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제122조(연삭기 덮개)", "같은 규칙 제617조(호흡용 보호구의 지급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["방호덮개", "습식 절단", "날 상태"],
+      "keywords": ["커터", "절단", "분진"]
+    },
+    {
+      "id": "HZ-ROAD-005",
+      "task": "롤러 다짐",
+      "hazard": "롤러 전·후진 중 작업자 협착",
+      "accidentTypes": ["ROLLOVER", "STRIKE"],
+      "controls": [
+        { "type": "ENG", "text": "후방감지장치·경광등 작동 확인" },
+        { "type": "ADMIN", "text": "롤러 진행방향 전방 작업 금지, 유도자 배치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제200조(접촉의 방지)", "같은 규칙 제98조(제한속도의 지정 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["후방감지장치", "유도자", "작업 위치"],
+      "keywords": ["롤러", "다짐", "협착"]
+    },
+    {
+      "id": "HZ-ROAD-006",
+      "task": "야간 도로작업",
+      "hazard": "조도 부족과 운전자 시인성 저하로 사고",
+      "accidentTypes": ["TRAFFIC"],
+      "controls": [
+        { "type": "ENG", "text": "이동식 조명탑 설치 및 반사·발광 표지 강화" },
+        { "type": "PPE", "text": "야광 안전조끼 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제8조(조도)", "같은 규칙 제32조(보호구의 지급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["조명탑", "반사표지", "야광조끼"],
+      "keywords": ["야간작업", "시인성", "조명"]
+    }
+  ]
+}

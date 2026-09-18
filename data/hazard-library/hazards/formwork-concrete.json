@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "FORM",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-FORM-001",
+      "task": "거푸집 동바리 설치",
+      "hazard": "동바리 이음·연결 불량, 수평연결재 미설치로 타설 중 붕괴",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ENG", "text": "조립도에 따라 동바리를 설치하고 높이 3.5m 초과 시 수평연결재 2방향 설치" },
+        { "type": "ENG", "text": "동바리 하부에 받침판 설치 및 침하 방지" },
+        { "type": "ADMIN", "text": "타설 전 구조검토 결과와 대조 점검하고 작업지휘자 지정" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제331조(조립도)", "같은 규칙 제332조(거푸집동바리등의 안전조치)", "같은 규칙 제39조(작업지휘자의 지정)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["조립도 대조", "수평연결재", "받침판", "이음 상태", "수직도"],
+      "keywords": ["동바리", "거푸집", "붕괴", "조립도"]
+    },
+    {
+      "id": "HZ-FORM-002",
+      "task": "거푸집 설치",
+      "hazard": "슬래브 단부 등 고소에서 거푸집 설치 중 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "ENG", "text": "단부에 안전난간 또는 추락방호망 선행 설치" },
+        { "type": "ENG", "text": "안전대 부착설비(수평구명줄) 설치" },
+        { "type": "PPE", "text": "안전대 상시 체결" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제42조(추락의 방지)", "같은 규칙 제44조(안전대의 부착설비 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["단부 난간", "방호망", "수평구명줄", "안전대 체결"],
+      "keywords": ["슬래브단부", "추락", "거푸집"]
+    },
+    {
+      "id": "HZ-FORM-003",
+      "task": "콘크리트 타설",
+      "hazard": "편심 타설·집중 타설로 동바리에 과하중이 걸려 붕괴",
+      "accidentTypes": ["COLLAPSE"],
+      "controls": [
+        { "type": "ADMIN", "text": "타설 순서·속도·높이를 계획대로 준수하고 분산 타설" },
+        { "type": "ADMIN", "text": "타설 중 동바리 감시자 배치, 이상 시 즉시 중지·대피" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제334조(콘크리트의 타설작업)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["타설계획 준수", "감시자 배치", "동바리 변형 관찰"],
+      "keywords": ["타설", "편심", "동바리감시"]
+    },
+    {
+      "id": "HZ-FORM-004",
+      "task": "콘크리트 펌프카 작업",
+      "hazard": "아웃트리거 미전개·지반 침하로 펌프카가 전도",
+      "accidentTypes": ["ROLLOVER"],
+      "controls": [
+        { "type": "ENG", "text": "아웃트리거 완전 전개 및 받침판 설치, 지반 지지력 확인" },
+        { "type": "ADMIN", "text": "설치 위치 사전 검토 및 작업 중 지반 침하 관찰" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제335조(콘크리트 타설장비 사용 시의 준수사항)", "같은 규칙 제199조(전도 등의 방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["아웃트리거 전개", "받침판", "지반 상태"],
+      "keywords": ["펌프카", "아웃트리거", "전도"]
+    },
+    {
+      "id": "HZ-FORM-005",
+      "task": "콘크리트 펌프카 작업",
+      "hazard": "배관 막힘 해소 중 압력이 급격히 방출되어 배관·호스가 튕김",
+      "accidentTypes": ["HIT", "EXPLO"],
+      "controls": [
+        { "type": "ADMIN", "text": "막힘 해소 전 반드시 압력 해제 후 작업" },
+        { "type": "ENG", "text": "배관 연결부 안전핀·안전클램프 이중 체결" },
+        { "type": "ADMIN", "text": "토출구 전방 접근 금지 구역 설정" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제335조(콘크리트 타설장비 사용 시의 준수사항)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["압력 해제 절차", "안전핀 체결", "접근금지 구역"],
+      "keywords": ["펌프카", "배관막힘", "압력"]
+    },
+    {
+      "id": "HZ-FORM-006",
+      "task": "거푸집 해체",
+      "hazard": "양생 부족 상태 해체 또는 해체 부재 낙하로 맞음",
+      "accidentTypes": ["HIT", "COLLAPSE"],
+      "controls": [
+        { "type": "ADMIN", "text": "압축강도 확인 후 해체 시기 결정" },
+        { "type": "ENG", "text": "해체구간 하부 출입금지 및 낙하방지 조치" },
+        { "type": "ADMIN", "text": "해체 순서 준수 및 작업지휘자 배치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제336조(조립등작업 시의 준수사항)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["강도 시험 결과", "하부 통제", "해체 순서"],
+      "keywords": ["거푸집해체", "양생", "낙하"]
+    },
+    {
+      "id": "HZ-FORM-007",
+      "task": "자재 인양",
+      "hazard": "거푸집·동바리 자재 인양 중 결속 불량으로 낙하",
+      "accidentTypes": ["HIT"],
+      "controls": [
+        { "type": "ENG", "text": "전용 인양기구 사용 및 2점 이상 결속" },
+        { "type": "ADMIN", "text": "인양 경로 하부 출입금지 및 신호수 배치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제163조(와이어로프 등 달기구의 안전계수)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["결속 상태", "하부 통제", "신호수"],
+      "keywords": ["인양", "낙하", "결속"]
+    },
+    {
+      "id": "HZ-FORM-008",
+      "task": "콘크리트 타설",
+      "hazard": "콘크리트가 피부·눈에 접촉해 화상·염증 발생",
+      "accidentTypes": ["CHEM"],
+      "controls": [
+        { "type": "PPE", "text": "보안경·방수장갑·장화 착용" },
+        { "type": "ADMIN", "text": "접촉 시 즉시 세척 및 세안설비 비치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "같은 규칙 제464조(세척시설 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["보호구 착용", "세척설비 위치"],
+      "keywords": ["콘크리트", "화상", "알칼리"]
+    },
+    {
+      "id": "HZ-FORM-009",
+      "task": "진동다짐",
+      "hazard": "진동기 전원선 손상으로 감전, 장시간 사용으로 진동 노출",
+      "accidentTypes": ["SHOCK", "NOISE"],
+      "controls": [
+        { "type": "ENG", "text": "누전차단기 접속 및 전원선 피복 점검" },
+        { "type": "ADMIN", "text": "교대 작업으로 연속 사용시간 제한" },
+        { "type": "PPE", "text": "절연장갑·방진장갑 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제304조(누전차단기에 의한 감전방지)", "같은 규칙 제519조(진동작업에 대한 조치)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 2,
+      "checkItems": ["누전차단기", "전원선 피복", "교대 주기"],
+      "keywords": ["진동기", "바이브레이터", "감전"]
+    },
+    {
+      "id": "HZ-FORM-010",
+      "task": "철근 배근",
+      "hazard": "돌출된 철근에 찔리거나 베임",
+      "accidentTypes": ["CUT"],
+      "controls": [
+        { "type": "ENG", "text": "돌출 철근에 캡 씌우기 또는 절곡" },
+        { "type": "PPE", "text": "안전화·작업장갑 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제32조(보호구의 지급 등)", "근거 확인 불가(돌출철근 캡 설치를 직접 규정한 조문 미확인)"],
+      "legalBasisVerified": false,
+      "severityDefault": 2,
+      "likelihoodDefault": 3,
+      "checkItems": ["돌출철근 캡", "통로상 철근"],
+      "keywords": ["철근", "찔림", "캡"]
+    },
+    {
+      "id": "HZ-FORM-011",
+      "task": "철근 인양·배근",
+      "hazard": "철근 다발 인양 중 낱개 이탈로 하부 작업자가 맞음",
+      "accidentTypes": ["HIT"],
+      "controls": [
+        { "type": "ENG", "text": "2점 결속 및 이탈방지 조치 후 인양" },
+        { "type": "ADMIN", "text": "인양 하부 출입금지 및 유도" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제163조(와이어로프 등 달기구의 안전계수)", "같은 규칙 제20조(출입의 금지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["결속 방법", "하부 통제"],
+      "keywords": ["철근인양", "낙하"]
+    },
+    {
+      "id": "HZ-FORM-012",
+      "task": "철근 가공",
+      "hazard": "절단기·절곡기 회전부에 손이 끼임",
+      "accidentTypes": ["CAUGHT", "CUT"],
+      "controls": [
+        { "type": "ENG", "text": "방호덮개 설치 및 비상정지장치 확인" },
+        { "type": "ADMIN", "text": "작업 전 점검 및 정비 시 전원 차단·표지 부착" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제87조(원동기·회전축 등의 위험 방지)", "같은 규칙 제92조(정비 등의 작업 시의 운전정지 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["방호덮개", "비상정지", "전원차단 표지"],
+      "keywords": ["절단기", "절곡기", "끼임"]
+    }
+  ]
+}

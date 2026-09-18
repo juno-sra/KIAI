@@ -1,0 +1,23 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/core"
+    },
+    {
+      "path": "./packages/crypto"
+    },
+    {
+      "path": "./packages/sync"
+    },
+    {
+      "path": "./packages/module-sdk"
+    },
+    {
+      "path": "./modules/daily"
+    },
+    {
+      "path": "./desktop"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "smp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "SMP (Safety Management Program) — 건설현장 안전관리 모듈 조합형 데스크톱 프로그램",
+  "workspaces": [
+    "packages/*",
+    "modules/*",
+    "desktop"
+  ],
+  "scripts": {
+    "build": "tsc --build && node tools/copy-desktop-assets.mjs",
+    "clean": "tsc --build --clean",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --build --force",
+    "demo": "npm run build && node tools/demo.mjs",
+    "sample:tbm": "npm run build && node tools/sample-tbm.mjs",
+    "verify:print": "npm run build && node tools/verify-print.mjs",
+    "pdf": "node tools/to-pdf.mjs",
+    "app": "npm run build && electron desktop"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8",
+    "playwright-core": "^1.49.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

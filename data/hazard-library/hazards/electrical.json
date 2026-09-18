@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "workTypeCode": "ELEC",
+  "updatedAt": "2026-09-17",
+  "hazards": [
+    {
+      "id": "HZ-ELEC-001",
+      "task": "정전작업",
+      "hazard": "타인의 임의 통전으로 작업 중 감전",
+      "accidentTypes": ["SHOCK"],
+      "controls": [
+        { "type": "ENG", "text": "개폐기 시건장치 설치 및 '통전금지' 표지 부착" },
+        { "type": "ADMIN", "text": "검전으로 무전압 확인 후 단락접지 실시" },
+        { "type": "ADMIN", "text": "작업지휘자 지정 및 작업자 전원 대피 확인 후 통전" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제319조(정전전로에서의 전기작업)", "같은 규칙 제320조(정전전로 인근에서의 전기작업)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["시건장치", "통전금지 표지", "검전 실시", "단락접지"],
+      "keywords": ["정전작업", "LOTO", "단락접지", "검전"]
+    },
+    {
+      "id": "HZ-ELEC-002",
+      "task": "활선 근접작업",
+      "hazard": "충전부 접근한계거리 미확보로 감전",
+      "accidentTypes": ["SHOCK"],
+      "controls": [
+        { "type": "ELIM", "text": "가능하면 정전 후 작업" },
+        { "type": "ENG", "text": "절연용 방호구 설치 및 접근한계거리 표시" },
+        { "type": "PPE", "text": "절연용 보호구 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제321조(충전전로 인근에서의 차량·기계장치 작업)", "같은 규칙 제323조(절연용 보호구 등의 사용)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["접근한계거리", "방호구 설치", "절연보호구"],
+      "keywords": ["활선", "접근한계", "절연"]
+    },
+    {
+      "id": "HZ-ELEC-003",
+      "task": "전동공구 사용",
+      "hazard": "접지 불량·누전차단기 미설치로 감전",
+      "accidentTypes": ["SHOCK"],
+      "controls": [
+        { "type": "ENG", "text": "누전차단기 접속 및 접지 실시" },
+        { "type": "ADMIN", "text": "작업 전 외함·코드 손상 점검 및 시험버튼 동작 확인" },
+        { "type": "PPE", "text": "절연장갑·절연화 착용" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제302조(전기 기계·기구의 접지)", "같은 규칙 제304조(누전차단기에 의한 감전방지)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["누전차단기 시험", "접지", "코드 손상"],
+      "keywords": ["전동공구", "누전", "접지"]
+    },
+    {
+      "id": "HZ-ELEC-004",
+      "task": "습윤장소 전기작업",
+      "hazard": "물기 있는 장소에서 전기기계 사용으로 감전 위험 증가",
+      "accidentTypes": ["SHOCK"],
+      "controls": [
+        { "type": "ENG", "text": "안전전압 사용 또는 이중절연 기기 사용" },
+        { "type": "ENG", "text": "배수 실시 및 절연매트 설치" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제304조(누전차단기에 의한 감전방지)", "같은 규칙 제306조(교류아크용접기 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 2,
+      "checkItems": ["배수 상태", "절연매트", "기기 종류"],
+      "keywords": ["습윤", "물기", "감전"]
+    },
+    {
+      "id": "HZ-ELEC-005",
+      "task": "배선·배관 작업",
+      "hazard": "천장 고소작업 중 사다리에서 떨어짐",
+      "accidentTypes": ["FALL"],
+      "controls": [
+        { "type": "SUBST", "text": "사다리 대신 이동식비계·고소작업대 사용" },
+        { "type": "ADMIN", "text": "2인 1조 작업 및 사다리 고정" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제42조(추락의 방지)", "같은 규칙 제24조(사다리식 통로 등의 구조)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 3,
+      "checkItems": ["작업대 종류", "고정 상태", "2인 1조"],
+      "keywords": ["천장작업", "사다리", "추락"]
+    },
+    {
+      "id": "HZ-ELEC-006",
+      "task": "수배전반 작업",
+      "hazard": "아크 플래시로 인한 화상·실명",
+      "accidentTypes": ["FIRE", "TEMP_EXP"],
+      "controls": [
+        { "type": "ELIM", "text": "정전 상태에서 작업" },
+        { "type": "PPE", "text": "아크 방호복·안면보호구 착용" },
+        { "type": "ADMIN", "text": "작업 절차서 수립 및 2인 이상 작업" }
+      ],
+      "legalBasis": ["산업안전보건기준에 관한 규칙 제319조(정전전로에서의 전기작업)", "같은 규칙 제32조(보호구의 지급 등)"],
+      "legalBasisVerified": false,
+      "severityDefault": 3,
+      "likelihoodDefault": 1,
+      "checkItems": ["정전 여부", "아크 방호복", "작업 인원"],
+      "keywords": ["아크플래시", "수배전반", "화상"]
+    }
+  ]
+}
