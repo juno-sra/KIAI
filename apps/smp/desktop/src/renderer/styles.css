@@ -1,0 +1,211 @@
+/*
+ * 화면 서식.
+ *
+ * 글꼴은 Pretendard 계열로 고정한다. 프로그램 안에 넣은 글꼴을 먼저 쓰고,
+ * 없으면 윈도우에 설치된 Pretendard, 그 다음에야 시스템 기본으로 내려간다.
+ */
+@font-face {
+  font-family: 'Pretendard SMP';
+  src: url('./fonts/Pretendard-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard SMP';
+  src: url('./fonts/Pretendard-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --ink: #16191d;
+  --muted: #6b7280;
+  --line: #d9dde3;
+  --bg: #f5f6f8;
+  --panel: #ffffff;
+  --accent: #14532d;
+  --warn: #b45309;
+  --block: #b91c1c;
+  --ok: #15803d;
+  font-family: 'Pretendard SMP', Pretendard, 'Pretendard Variable', system-ui, sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+#app { max-width: 1180px; margin: 0 auto; padding: 0 20px 48px; }
+
+.app-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 18px 0 10px;
+  border-bottom: 1px solid var(--line);
+}
+.brand strong { font-size: 20px; letter-spacing: 0.04em; }
+.brand span { margin-left: 8px; color: var(--muted); font-size: 13px; }
+.site { font-weight: 700; }
+.badge {
+  margin-left: auto;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: var(--warn);
+  font-size: 12px;
+}
+
+.nav { display: flex; gap: 6px; padding: 12px 0; }
+.tab {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 6px;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+.tab:hover { border-color: var(--accent); }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+.panel h2 { margin: 0 0 10px; font-size: 17px; }
+.panel h3 { margin: 0 0 10px; font-size: 15px; }
+
+.muted { color: var(--muted); font-size: 13px; line-height: 1.6; }
+.mono { font-family: Consolas, 'Courier New', monospace; font-size: 13px; }
+
+.grid { display: grid; gap: 12px; margin-bottom: 12px; }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.bar { margin-bottom: 14px; }
+
+.field { display: block; margin-bottom: 10px; }
+.field-label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.field-hint { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+input, select, textarea {
+  width: 100%;
+  font: inherit;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: #fff;
+}
+input[type='checkbox'] { width: auto; }
+textarea { resize: vertical; }
+/* 비워 두면 확정할 수 없는 칸 */
+input.need { border-color: var(--block); background: #fff5f5; }
+
+.check { display: inline-flex; align-items: center; gap: 6px; margin-right: 16px; }
+
+button {
+  font: inherit;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: 0.5; cursor: default; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.ghost { color: var(--muted); }
+button.small { padding: 4px 10px; font-size: 13px; }
+
+.steps { display: flex; gap: 6px; list-style: none; margin: 0 0 16px; padding: 0; }
+.step {
+  flex: 1;
+  text-align: center;
+  padding: 9px 4px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  font-size: 13px;
+  cursor: pointer;
+}
+.step-current { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+
+.editor-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
+
+.suggest {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.suggest:last-of-type { border-bottom: 0; }
+
+.hazard { border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; margin-bottom: 10px; }
+.hazard-critical { border-left: 4px solid var(--block); }
+
+/* 법적 근거. 원문과 대조하지 않은 것은 눈에 띄게 둔다 */
+.basis { display: inline-block; margin-top: 4px; font-size: 12px; color: var(--muted); }
+.basis-unverified em { color: var(--warn); font-style: normal; font-weight: 700; }
+
+table { width: 100%; border-collapse: collapse; }
+.list th, .list td, .attendees th, .attendees td {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 6px;
+  text-align: left;
+  font-size: 14px;
+}
+.list th, .attendees th { color: var(--muted); font-size: 12px; font-weight: 400; }
+.summary th { width: 110px; color: var(--muted); font-weight: 400; padding: 6px 0; text-align: left; }
+.summary td { padding: 6px 0; }
+.warn-cell { color: var(--warn); font-weight: 700; }
+
+.chip {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-right: 4px;
+  border-radius: 999px;
+  background: #eef1f4;
+  font-size: 12px;
+}
+.chip-done { background: #dcfce7; color: var(--ok); }
+.chip-amend { background: #fef3c7; color: var(--warn); }
+
+.notice { padding: 9px 12px; border-radius: 6px; background: #eef1f4; font-size: 14px; margin: 8px 0; }
+.notice-ok { background: #dcfce7; color: var(--ok); }
+.notice-warn { background: #fef3c7; color: var(--warn); }
+.notice-block { background: #fee2e2; color: var(--block); }
+
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  max-width: 420px;
+  padding: 11px 16px;
+  border-radius: 6px;
+  background: #16191d;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+.toast-warn { background: var(--warn); }
+.toast[hidden] { display: none; }
+
+/*
+ * 폭 보정.
+ *
+ * 입력칸은 기본이 한 줄 전체다. 한 줄에 나란히 놓이는 것(달 선택, 표 안의
+ * 선택칸)까지 전체 폭이 되면 옆 칸이 눌려서 못 읽게 된다.
+ */
+.row > input,
+.row > select { width: auto; min-width: 160px; }
+.attendees select { width: auto; min-width: 120px; }
+.attendees td input[type='text'] { width: auto; min-width: 180px; margin-left: 8px; }
+.hazard .field { margin-top: 10px; }

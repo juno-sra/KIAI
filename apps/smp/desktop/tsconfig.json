@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    { "path": "../packages/core" },
+    { "path": "../packages/crypto" },
+    { "path": "../packages/sync" },
+    { "path": "../packages/module-sdk" },
+    { "path": "../modules/daily" }
+  ]
+}
